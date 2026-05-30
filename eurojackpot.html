@@ -1,0 +1,1906 @@
+<!DOCTYPE html>
+<html lang="de" data-theme="light">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Lotto Tracker 2026 — Eurojackpot & 6aus49</title>
+<style>
+/* ══════ THEME ══════ */
+:root{
+  --gold:#B8860B;--gold-l:#F5C842;--gold-bg:#FFFBEA;--gold-bd:#DDB84A;
+  --red-l:#E53935;--red-bg:#FEF2F2;--red-bd:#FECACA;--red-dark:#B71C1C;
+  --blue:#2563EB;--blue-bg:#EFF6FF;--blue-bd:#BFDBFE;
+  --green:#16A34A;--green-bg:#F0FDF4;--green-bd:#86EFAC;
+  --orange:#EA580C;--orange-bg:#FFF7ED;--orange-bd:#FED7AA;
+  --purple:#7C3AED;--purple-bg:#F5F3FF;--purple-bd:#DDD6FE;
+  --teal:#0D9488;--teal-bg:#F0FDFA;--teal-bd:#99F6E4;
+  --bg:#F1F5F9;--surface:#FFF;--s2:#F8FAFC;--s3:#F1F5F9;
+  --border:#E2E8F0;--bd2:#CBD5E1;
+  --text:#0F172A;--t2:#334155;--t3:#64748B;--t4:#94A3B8;
+  --sh0:0 1px 2px rgba(0,0,0,.05);
+  --sh1:0 1px 3px rgba(0,0,0,.08),0 1px 2px rgba(0,0,0,.04);
+  --sh2:0 4px 6px -1px rgba(0,0,0,.07),0 2px 4px rgba(0,0,0,.04);
+  --sh3:0 10px 15px -3px rgba(0,0,0,.07);
+  --sh4:0 20px 25px -5px rgba(0,0,0,.08);
+  --r:10px;--rs:7px;--rl:16px;--rxl:22px;--tr:.16s ease;
+  /* Lotto colors */
+  --lotto:#E53935;--lotto-bg:#FFF5F5;--lotto-bd:#FFCDD2;
+  --ej:#B8860B;--ej-bg:#FFFBEA;--ej-bd:#DDB84A;
+}
+[data-theme="dark"]{
+  --bg:#0F172A;--surface:#1E293B;--s2:#0F172A;--s3:#334155;
+  --border:#334155;--bd2:#475569;
+  --text:#F1F5F9;--t2:#CBD5E1;--t3:#94A3B8;--t4:#64748B;
+  --gold-bg:#1A1200;--gold-bd:#6B4F08;
+  --blue-bg:#0C1A3A;--blue-bd:#1E3A8A;
+  --green-bg:#052E16;--green-bd:#14532D;
+  --red-bg:#2A0A0A;--red-bd:#7F1D1D;
+  --orange-bg:#1C0D02;--orange-bd:#7C2D12;
+  --purple-bg:#130520;--purple-bd:#4C1D95;
+  --lotto-bg:#2A0505;--lotto-bd:#7F1D1D;
+  --ej-bg:#1A1200;--ej-bd:#6B4F08;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:15px}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;
+  background:var(--bg);color:var(--text);line-height:1.5;min-height:100vh;
+  transition:background .25s,color .25s}
+
+/* ══════ TOPBAR ══════ */
+.topbar{position:sticky;top:0;z-index:300;background:var(--surface);
+  border-bottom:1px solid var(--border);box-shadow:var(--sh1)}
+.tbi{max-width:1400px;margin:0 auto;display:flex;align-items:center;
+  padding:0 12px;height:52px;gap:6px}
+.logo{display:flex;align-items:center;gap:8px;text-decoration:none;flex-shrink:0}
+.logo-ico{font-size:1.3rem;flex-shrink:0}
+.logo-name{font-weight:800;font-size:.9rem;color:var(--text);letter-spacing:-.3px;white-space:nowrap}
+.logo-sub{font-size:.58rem;color:var(--t4);letter-spacing:.3px;text-transform:uppercase}
+/* Game selector tabs in topbar */
+.game-tabs{display:flex;gap:3px;flex-shrink:0}
+.game-tab{
+  display:inline-flex;align-items:center;gap:5px;
+  padding:5px 11px;border-radius:var(--rs);border:1.5px solid var(--border);
+  background:none;cursor:pointer;font-family:inherit;font-size:.74rem;font-weight:700;
+  color:var(--t3);transition:all var(--tr);white-space:nowrap}
+.game-tab:hover{border-color:var(--gold);color:var(--gold)}
+.game-tab.ej-active{background:var(--ej-bg);border-color:var(--ej-bd);color:var(--ej)}
+.game-tab.lo-active{background:var(--lotto-bg);border-color:var(--lotto-bd);color:var(--lotto)}
+/* Nav */
+.tb-nav{display:flex;gap:1px;flex:1;justify-content:center;overflow-x:auto;min-width:0;scrollbar-width:none}
+.tb-nav::-webkit-scrollbar{display:none}
+.nb{background:none;border:none;cursor:pointer;font-family:inherit;font-size:.73rem;font-weight:600;
+  color:var(--t3);padding:5px 9px;border-radius:6px;white-space:nowrap;transition:background var(--tr),color var(--tr)}
+.nb:hover{background:var(--s3);color:var(--text)}
+.nb.active{border:1px solid}
+.nb.ej-nb.active{background:var(--ej-bg);color:var(--ej);border-color:var(--ej-bd)}
+.nb.lo-nb.active{background:var(--lotto-bg);color:var(--lotto);border-color:var(--lotto-bd)}
+/* Right */
+.tb-right{display:flex;align-items:center;gap:5px;flex-shrink:0;margin-left:2px}
+.dt-box{display:flex;flex-direction:column;align-items:flex-end;flex-shrink:0;
+  padding:3px 9px;background:var(--s2);border:1px solid var(--border);
+  border-radius:var(--rs);line-height:1.25;cursor:default;user-select:none}
+.dt-time{font-size:.85rem;font-weight:800;color:var(--text);
+  font-variant-numeric:tabular-nums;letter-spacing:.5px}
+.dt-date{font-size:.57rem;color:var(--t3);font-weight:500;white-space:nowrap}
+@media(max-width:900px){.dt-date{display:none}}
+@media(max-width:500px){.dt-box{display:none}}
+.live{display:flex;align-items:center;gap:4px;background:var(--red-bg);color:var(--red-l);
+  font-size:.62rem;font-weight:700;letter-spacing:.8px;
+  padding:3px 7px;border-radius:999px;border:1px solid var(--red-bd);flex-shrink:0}
+.live-dot{width:5px;height:5px;border-radius:50%;background:var(--red-l);animation:blink 1.3s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+.btn-ref{display:inline-flex;align-items:center;gap:5px;padding:5px 11px;border-radius:var(--rs);
+  border:none;cursor:pointer;font-family:inherit;font-size:.74rem;font-weight:700;
+  white-space:nowrap;flex-shrink:0;transition:all var(--tr);color:#fff}
+.btn-ref.ej-ref{background:var(--gold)}
+.btn-ref.ej-ref:hover{background:#96700a}
+.btn-ref.lo-ref{background:var(--lotto)}
+.btn-ref.lo-ref:hover{background:var(--red-dark)}
+.ref-ico{display:inline-block;transition:transform .65s ease}
+@media(max-width:760px){.btn-ref .ref-txt{display:none}.btn-ref{padding:5px 8px}}
+.icobtn{background:none;border:1.5px solid var(--bd2);border-radius:var(--rs);
+  padding:5px 7px;cursor:pointer;font-size:.82rem;color:var(--t3);flex-shrink:0;transition:all var(--tr)}
+.icobtn:hover{background:var(--s3);border-color:var(--gold);color:var(--gold)}
+.ham{display:none;flex-direction:column;gap:4px;background:none;border:none;cursor:pointer;padding:6px;flex-shrink:0}
+.ham span{display:block;width:18px;height:2px;background:var(--t3);border-radius:2px;transition:var(--tr)}
+@media(max-width:760px){
+  .ham{display:flex}
+  .tb-nav{display:none;flex-direction:column;position:fixed;top:52px;left:0;right:0;bottom:0;
+    background:var(--surface);border-top:1px solid var(--border);padding:8px;gap:3px;z-index:299;overflow-y:auto}
+  .tb-nav.open{display:flex}
+  .nb{font-size:.88rem;padding:11px 14px;border-radius:8px;text-align:left}
+  .live{display:none}
+  .game-tabs{display:none}
+}
+
+/* ══════ LAYOUT ══════ */
+.page{max-width:1400px;margin:0 auto;padding:16px 12px 80px}
+.game-panel{display:none}.game-panel.active{display:block}
+.tab{display:none}.tab.active{display:block}
+
+/* ══════ GAME HEADER STRIP ══════ */
+.game-strip{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:10px 14px;border-radius:var(--r);margin-bottom:12px;
+  border:1px solid;font-weight:700;font-size:.85rem;flex-wrap:wrap;gap:8px}
+.gs-ej{background:var(--ej-bg);border-color:var(--ej-bd);color:var(--ej)}
+.gs-lo{background:var(--lotto-bg);border-color:var(--lotto-bd);color:var(--lotto)}
+.gs-tabs{display:flex;gap:3px}
+.gs-tab{background:none;border:1.5px solid;border-radius:var(--rs);padding:4px 10px;
+  font-family:inherit;font-size:.69rem;font-weight:600;cursor:pointer;transition:all var(--tr)}
+.gs-tab.ej-t{border-color:var(--ej-bd);color:var(--ej)}
+.gs-tab.ej-t.active,.gs-tab.ej-t:hover{background:var(--gold);color:#fff;border-color:var(--gold)}
+.gs-tab.lo-t{border-color:var(--lotto-bd);color:var(--lotto)}
+.gs-tab.lo-t.active,.gs-tab.lo-t:hover{background:var(--lotto);color:#fff;border-color:var(--lotto)}
+
+/* ══════ GRID ══════ */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:12px}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:12px}
+@media(max-width:960px){.g4{grid-template-columns:1fr 1fr}.g3{grid-template-columns:1fr 1fr}}
+@media(max-width:580px){.g4,.g3,.g2{grid-template-columns:1fr}}
+
+/* ══════ CARDS ══════ */
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);box-shadow:var(--sh0)}
+.card:hover{box-shadow:var(--sh1)}
+.cp{padding:15px}.cps{padding:10px 13px}
+.ch{display:flex;align-items:center;justify-content:space-between;margin-bottom:11px;gap:8px}
+.ct{font-size:.83rem;font-weight:700;color:var(--text);display:flex;align-items:center;gap:6px;flex-shrink:0}
+
+/* ══════ BADGES ══════ */
+.bdg{font-size:.6rem;font-weight:700;letter-spacing:.4px;text-transform:uppercase;
+  padding:2px 7px;border-radius:999px;border:1px solid;white-space:nowrap}
+.bg{background:var(--ej-bg);color:var(--ej);border-color:var(--ej-bd)}
+.bl{background:var(--lotto-bg);color:var(--lotto);border-color:var(--lotto-bd)}
+.bb{background:var(--blue-bg);color:var(--blue);border-color:var(--blue-bd)}
+.bgn{background:var(--green-bg);color:var(--green);border-color:var(--green-bd)}
+.br{background:var(--red-bg);color:var(--red-l);border-color:var(--red-bd)}
+.bp{background:var(--purple-bg);color:var(--purple);border-color:var(--purple-bd)}
+.bt{background:var(--teal-bg);color:var(--teal);border-color:var(--teal-bd)}
+.bk{background:var(--s3);color:var(--t3);border-color:var(--bd2)}
+
+/* ══════ NOTICES ══════ */
+.notice{display:flex;align-items:flex-start;gap:8px;padding:9px 12px;
+  border-radius:var(--rs);font-size:.74rem;line-height:1.55;border:1px solid;margin-bottom:12px}
+.n-info{background:var(--blue-bg);border-color:var(--blue-bd);color:var(--blue)}
+.n-warn{background:var(--ej-bg);border-color:var(--ej-bd);color:#92400E}
+.n-success{background:var(--green-bg);border-color:var(--green-bd);color:var(--green)}
+.n-danger{background:var(--red-bg);border-color:var(--red-bd);color:var(--red-l)}
+
+/* ══════ HERO CARDS ══════ */
+.hero-ej{background:linear-gradient(135deg,#5C3A0A 0%,#B8860B 55%,#F5C842 100%);
+  border-radius:var(--rxl);padding:22px 24px;color:#fff;position:relative;overflow:hidden;
+  box-shadow:0 6px 24px rgba(184,134,11,.28);margin-bottom:12px}
+.hero-lo{background:linear-gradient(135deg,#7F0000 0%,#C62828 55%,#EF5350 100%);
+  border-radius:var(--rxl);padding:22px 24px;color:#fff;position:relative;overflow:hidden;
+  box-shadow:0 6px 24px rgba(198,40,40,.28);margin-bottom:12px}
+.hero-ej::before,.hero-ej::after,
+.hero-lo::before,.hero-lo::after{content:'';position:absolute;border-radius:50%;background:rgba(255,255,255,.08)}
+.hero-ej::before,.hero-lo::before{width:200px;height:200px;top:-55px;right:-40px}
+.hero-ej::after,.hero-lo::after{width:130px;height:130px;bottom:-55px;left:18px}
+.hero-eye{font-size:.65rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;opacity:.8;margin-bottom:3px}
+.hero-amt{font-size:clamp(1.9rem,4.5vw,3.2rem);font-weight:900;line-height:1;letter-spacing:-1px;
+  text-shadow:0 2px 8px rgba(0,0,0,.18)}
+.hero-sub{font-size:.78rem;opacity:.78;margin:5px 0 14px}
+.hero-tags{display:flex;flex-wrap:wrap;gap:6px}
+.hero-tag{display:inline-flex;align-items:center;gap:4px;
+  background:rgba(255,255,255,.18);backdrop-filter:blur(6px);
+  border:1px solid rgba(255,255,255,.25);
+  border-radius:999px;padding:3px 10px;font-size:.68rem;font-weight:600}
+
+/* ══════ COUNTDOWN ══════ */
+.cd-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:8px}
+.cd-box{background:var(--s2);border:1px solid var(--border);border-radius:var(--rs);padding:9px 4px;text-align:center}
+.cd-num{font-size:1.6rem;font-weight:800;color:var(--text);line-height:1;font-variant-numeric:tabular-nums}
+.cd-num.pulse{animation:pulse .18s ease}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.1)}}
+.cd-unit{font-size:.56rem;color:var(--t4);text-transform:uppercase;letter-spacing:.6px;margin-top:2px}
+/* Lotto red countdown */
+.cd-box.lo .cd-num{color:var(--lotto)}
+
+/* ══════ DEADLINE BAR ══════ */
+.dl-bar{display:flex;align-items:center;flex-wrap:wrap;gap:6px;
+  padding:9px 12px;background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--r);box-shadow:var(--sh0);margin-bottom:12px}
+.dl-lbl{font-size:.65rem;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:.5px}
+.dl-pill{display:inline-flex;align-items:center;gap:4px;
+  padding:3px 8px;border-radius:999px;font-size:.7rem;font-weight:600;border:1px solid}
+.dp-r{background:var(--red-bg);color:var(--red-l);border-color:var(--red-bd)}
+.dp-o{background:var(--orange-bg);color:var(--orange);border-color:var(--orange-bd)}
+.dp-b{background:var(--blue-bg);color:var(--blue);border-color:var(--blue-bd)}
+.dp-g{background:var(--green-bg);color:var(--green);border-color:var(--green-bd)}
+.dl-dot{width:5px;height:5px;border-radius:50%;flex-shrink:0}
+
+/* ══════ STAT MINIS ══════ */
+.sm{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:12px 14px;box-shadow:var(--sh0)}
+.sm-ico{font-size:1.15rem;margin-bottom:4px}
+.sm-lbl{font-size:.62rem;font-weight:700;color:var(--t4);text-transform:uppercase;letter-spacing:.5px;margin-bottom:3px}
+.sm-val{font-size:1.55rem;font-weight:800;color:var(--text);line-height:1}
+.sm-sub{font-size:.68rem;color:var(--t3);margin-top:3px}
+.trend{font-size:.62rem;font-weight:700;display:inline-flex;align-items:center;gap:2px;
+  margin-top:4px;padding:1px 5px;border-radius:999px}
+.t-up{background:var(--green-bg);color:var(--green)}
+.t-dn{background:var(--red-bg);color:var(--red-l)}
+.t-nt{background:var(--s3);color:var(--t4)}
+
+/* ══════ BALLS — EUROJACKPOT ══════ */
+.ball{width:34px;height:34px;border-radius:50%;display:inline-flex;
+  align-items:center;justify-content:center;font-weight:700;font-size:.79rem;
+  flex-shrink:0;user-select:none;transition:transform .14s;cursor:default}
+.ball:hover{transform:scale(1.13)}
+.ball.m{background:var(--ej-bg);border:2px solid var(--ej-bd);color:var(--ej)}     /* EJ main */
+.ball.e{background:var(--blue-bg);border:2px solid var(--blue-bd);color:var(--blue)} /* EJ euro */
+/* LOTTO 6aus49 balls */
+.ball.l6{background:var(--lotto-bg);border:2px solid var(--lotto-bd);color:var(--lotto)} /* Lotto 6 */
+.ball.sz{background:var(--purple-bg);border:2px solid var(--purple-bd);color:var(--purple)} /* Superzahl */
+.ball.lg{width:42px;height:42px;font-size:.88rem}
+.ball.sm{width:25px;height:25px;font-size:.65rem}
+.ball.xs{width:20px;height:20px;font-size:.56rem}
+.bsep{color:var(--t4);margin:0 3px;font-size:.78rem}
+.brow{display:flex;align-items:center;gap:4px;flex-wrap:wrap}
+.sz-label{font-size:.62rem;color:var(--t4);font-weight:600;white-space:nowrap}
+
+/* ══════ DRAW ROWS ══════ */
+.draws-wrap{display:flex;flex-direction:column;gap:7px;margin-bottom:12px}
+.draw-row{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);
+  padding:10px 13px;display:flex;align-items:center;flex-wrap:wrap;gap:8px;
+  box-shadow:var(--sh0);transition:box-shadow var(--tr),border-color var(--tr)}
+.draw-row:hover{box-shadow:var(--sh2);border-color:var(--ej-bd)}
+.draw-row.lo-row:hover{border-color:var(--lotto-bd)}
+.draw-row.latest-ej{border-color:var(--ej-bd);background:var(--ej-bg)}
+.draw-row.latest-lo{border-color:var(--lotto-bd);background:var(--lotto-bg)}
+.draw-row.won{border-color:var(--green-bd);background:var(--green-bg)}
+.dr-meta{min-width:110px}
+.dr-idx{font-size:.6rem;font-weight:700;color:var(--t4);text-transform:uppercase;letter-spacing:.4px}
+.dr-date{font-size:.84rem;font-weight:700;color:var(--text)}
+.dr-day{font-size:.69rem;color:var(--t3)}
+.dr-balls{display:flex;align-items:center;gap:4px;flex-wrap:wrap;flex:1}
+.dr-info{margin-left:auto;text-align:right;font-size:.66rem;color:var(--t4);line-height:1.55;white-space:nowrap}
+.latest-tag-ej{font-size:.58rem;font-weight:700;text-transform:uppercase;
+  background:var(--gold);color:#fff;padding:2px 7px;border-radius:999px}
+.latest-tag-lo{font-size:.58rem;font-weight:700;text-transform:uppercase;
+  background:var(--lotto);color:#fff;padding:2px 7px;border-radius:999px}
+.won-tag{background:var(--green);color:#fff;font-size:.58rem;font-weight:700;padding:2px 7px;border-radius:999px}
+
+/* ══════ FREQ BARS ══════ */
+.flist{display:flex;flex-direction:column;gap:6px}
+.frow{display:flex;align-items:center;gap:7px}
+.ftrack{flex:1;background:var(--s3);border-radius:999px;height:6px;overflow:hidden}
+.ffill{height:100%;border-radius:999px;width:0;transition:width 1.1s cubic-bezier(.4,0,.2,1)}
+.fg{background:linear-gradient(90deg,var(--gold-l),var(--gold))}
+.fr{background:linear-gradient(90deg,#EF9A9A,var(--lotto))}
+.fb{background:linear-gradient(90deg,#93C5FD,var(--blue))}
+.fgr{background:linear-gradient(90deg,#CBD5E1,#64748B)}
+.fp{background:linear-gradient(90deg,#C4B5FD,var(--purple))}
+.fcnt{font-size:.68rem;color:var(--t3);min-width:18px;text-align:right;font-weight:600}
+.fpct{font-size:.61rem;color:var(--t4);min-width:25px;text-align:right}
+
+/* ══════ HEATMAP ══════ */
+.heatmap{display:grid;grid-template-columns:repeat(10,1fr);gap:4px}
+.heatmap.lo{grid-template-columns:repeat(7,1fr)}
+@media(max-width:460px){.heatmap{grid-template-columns:repeat(7,1fr)}}
+.hmc{aspect-ratio:1;border-radius:50%;display:flex;align-items:center;
+  justify-content:center;font-size:.6rem;font-weight:700;cursor:pointer;
+  position:relative;transition:transform .14s,box-shadow .14s}
+.hmc:hover{transform:scale(1.22);box-shadow:var(--sh3);z-index:5}
+.hmc-tip{position:absolute;bottom:calc(100%+5px);left:50%;transform:translateX(-50%);
+  background:var(--text);color:var(--surface);font-size:.58rem;
+  white-space:nowrap;padding:3px 6px;border-radius:4px;
+  opacity:0;pointer-events:none;transition:opacity .14s;z-index:10}
+.hmc:hover .hmc-tip{opacity:1}
+
+/* ══════ BUTTONS ══════ */
+.btn{display:inline-flex;align-items:center;gap:5px;padding:7px 13px;
+  border-radius:var(--rs);font-family:inherit;font-size:.76rem;font-weight:600;
+  cursor:pointer;border:none;transition:all var(--tr)}
+.btn:disabled{opacity:.4;cursor:not-allowed;pointer-events:none}
+.btn-ej{background:var(--gold);color:#fff}.btn-ej:hover{background:#96700a;transform:translateY(-1px)}
+.btn-lo{background:var(--lotto);color:#fff}.btn-lo:hover{background:var(--red-dark);transform:translateY(-1px)}
+.btn-outline{background:none;border:1.5px solid var(--bd2);color:var(--t2)}
+.btn-outline:hover{background:var(--s3);border-color:var(--gold);color:var(--gold)}
+.btn-ghost{background:none;border:none;color:var(--t3)}.btn-ghost:hover{color:var(--red-l)}
+.btn-green{background:var(--green);color:#fff}.btn-green:hover{background:#15803D}
+.btn-sm{padding:5px 10px;font-size:.7rem}
+.btn-xs{padding:3px 7px;font-size:.63rem}
+
+/* ══════ FILTERS ══════ */
+.fbar{display:flex;gap:5px;flex-wrap:wrap;align-items:center;margin-bottom:11px}
+.fc{background:var(--surface);border:1.5px solid var(--bd2);border-radius:999px;
+  padding:4px 10px;font-family:inherit;font-size:.69rem;font-weight:600;
+  color:var(--t3);cursor:pointer;transition:all var(--tr)}
+.fc:hover{border-color:var(--gold);color:var(--gold)}
+.fc.active-ej{background:var(--gold);border-color:var(--gold);color:#fff}
+.fc.active-lo{background:var(--lotto);border-color:var(--lotto);color:#fff}
+.si{background:var(--surface);border:1.5px solid var(--bd2);border-radius:999px;
+  padding:4px 12px;font-family:inherit;font-size:.69rem;color:var(--text);
+  outline:none;transition:border-color var(--tr);width:110px}
+.si::placeholder{color:var(--t4)}
+.si:focus{border-color:var(--gold)}
+
+/* ══════ TIMELINE ══════ */
+.tl{display:flex;flex-direction:column}
+.tl-item{display:flex;gap:10px;padding-bottom:13px}
+.tl-item:last-child{padding-bottom:0}
+.tl-l{display:flex;flex-direction:column;align-items:center;flex-shrink:0;width:22px}
+.tl-dot{width:10px;height:10px;border-radius:50%;margin-top:3px;flex-shrink:0}
+.tl-dot.ej-dot{background:var(--gold);border:2px solid var(--gold-l)}
+.tl-dot.lo-dot{background:var(--lotto);border:2px solid #EF9A9A}
+.tl-dot.first{width:13px;height:13px}
+.tl-dot.first.ej-dot{box-shadow:0 0 0 3px var(--ej-bg)}
+.tl-dot.first.lo-dot{box-shadow:0 0 0 3px var(--lotto-bg)}
+.tl-dot.won-dot{background:var(--green);border-color:var(--green-bd);box-shadow:0 0 0 3px var(--green-bg)}
+.tl-line{flex:1;width:2px;background:var(--border);margin-top:3px}
+.tl-item:last-child .tl-line{display:none}
+.tl-date{font-size:.69rem;font-weight:700;color:var(--t3);margin-bottom:4px}
+.tl-c{flex:1}
+
+/* ══════ GENERATOR ══════ */
+.gen-display{background:var(--s2);border:2px dashed var(--bd2);border-radius:var(--r);
+  padding:16px;display:flex;align-items:center;flex-wrap:wrap;gap:7px;
+  min-height:70px;margin-bottom:11px;transition:all var(--tr)}
+.gen-display.has-ej{border-color:var(--ej-bd);background:var(--ej-bg)}
+.gen-display.has-lo{border-color:var(--lotto-bd);background:var(--lotto-bg)}
+.tb{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;
+  justify-content:center;font-weight:700;font-size:.9rem;flex-shrink:0}
+.tb.m{background:linear-gradient(135deg,var(--gold-l),var(--gold));color:#fff;box-shadow:0 2px 8px rgba(184,134,11,.3)}
+.tb.e{background:linear-gradient(135deg,#93C5FD,var(--blue));color:#fff;box-shadow:0 2px 8px rgba(37,99,235,.22)}
+.tb.l6g{background:linear-gradient(135deg,#EF9A9A,var(--lotto));color:#fff;box-shadow:0 2px 8px rgba(229,57,53,.28)}
+.tb.szg{background:linear-gradient(135deg,#C4B5FD,var(--purple));color:#fff;box-shadow:0 2px 8px rgba(124,58,237,.22)}
+.tb.ph{background:var(--s3);border:2px dashed var(--bd2);color:var(--t4)}
+@keyframes popIn{0%{transform:scale(.3) rotate(-15deg);opacity:0}70%{transform:scale(1.1)}100%{transform:scale(1);opacity:1}}
+.pop{animation:popIn .28s cubic-bezier(.34,1.56,.64,1) both}
+.mtabs{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:10px}
+.mtab{background:none;border:1.5px solid var(--bd2);border-radius:var(--rs);
+  padding:4px 10px;font-family:inherit;font-size:.69rem;font-weight:600;
+  color:var(--t3);cursor:pointer;transition:all var(--tr)}
+.mtab:hover{border-color:var(--gold);color:var(--gold)}
+.mtab.active-ej{background:var(--gold);border-color:var(--gold);color:#fff}
+.mtab.active-lo{background:var(--lotto);border-color:var(--lotto);color:#fff}
+
+/* ══════ CHECKER ══════ */
+.chk-g{display:grid;grid-template-columns:repeat(10,1fr);gap:4px;margin-bottom:11px}
+.chk-eg{display:grid;grid-template-columns:repeat(12,1fr);gap:4px;margin-bottom:11px}
+.chk-lg{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-bottom:11px}
+.chk-szg{display:grid;grid-template-columns:repeat(10,1fr);gap:4px;margin-bottom:11px}
+@media(max-width:460px){.chk-g{grid-template-columns:repeat(7,1fr)}.chk-eg{grid-template-columns:repeat(6,1fr)}}
+.cc{aspect-ratio:1;border-radius:50%;border:1.5px solid var(--bd2);
+  background:var(--s2);color:var(--t3);font-size:.62rem;font-weight:700;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all var(--tr)}
+.cc:hover{border-color:var(--gold);color:var(--gold);background:var(--ej-bg)}
+.cc.sel-ej{background:var(--gold);border-color:var(--gold);color:#fff}
+.cc.sel-lo{background:var(--lotto);border-color:var(--lotto);color:#fff}
+.cc.sel-e{background:var(--blue);border-color:var(--blue);color:#fff}
+.cc.sel-sz{background:var(--purple);border-color:var(--purple);color:#fff}
+.cc.hit{background:var(--green);border-color:var(--green);color:#fff;animation:popIn .28s both}
+.cc.miss{background:var(--red-bg);border-color:var(--red-bd);color:var(--red-l)}
+.chk-res{border-radius:var(--rs);padding:12px 14px;font-size:.83rem;font-weight:600;
+  text-align:center;border:1px solid;margin-top:2px;line-height:1.5}
+.cr-idle{background:var(--s2);border-color:var(--border);color:var(--t3)}
+.cr-win{background:var(--green-bg);border-color:var(--green-bd);color:var(--green)}
+.cr-part{background:var(--ej-bg);border-color:var(--ej-bd);color:var(--ej)}
+.cr-lose{background:var(--red-bg);border-color:var(--red-bd);color:var(--red-l)}
+
+/* ══════ ODDS TABLE ══════ */
+.otable{width:100%;border-collapse:collapse;font-size:.74rem}
+.otable th{background:var(--s2);color:var(--t3);font-weight:700;font-size:.6rem;
+  text-transform:uppercase;letter-spacing:.5px;padding:8px 10px;text-align:left;border-bottom:1px solid var(--border)}
+.otable td{padding:8px 10px;border-bottom:1px solid var(--border);color:var(--t2);vertical-align:middle}
+.otable tr:last-child td{border-bottom:none}
+.otable tr:hover td{background:var(--s2)}
+.cl-n{display:inline-flex;align-items:center;justify-content:center;
+  width:21px;height:21px;border-radius:5px;font-size:.63rem;font-weight:800}
+.cl-n.ej{background:var(--ej-bg);color:var(--ej);border:1px solid var(--ej-bd)}
+.cl-n.ej.top{background:var(--gold);color:#fff;border:none}
+.cl-n.lo{background:var(--lotto-bg);color:var(--lotto);border:1px solid var(--lotto-bd)}
+.cl-n.lo.top{background:var(--lotto);color:#fff;border:none}
+.wbar{display:flex;align-items:center;gap:5px}
+.wbtrack{flex:1;max-width:65px;background:var(--s3);border-radius:999px;height:4px;overflow:hidden}
+.wbfill-ej{height:100%;border-radius:999px;background:linear-gradient(90deg,var(--gold-l),var(--gold))}
+.wbfill-lo{height:100%;border-radius:999px;background:linear-gradient(90deg,#EF9A9A,var(--lotto))}
+
+/* ══════ RING ══════ */
+.ring-wrap{display:flex;flex-direction:column;align-items:center;gap:5px;padding:4px 0}
+.pr-svg{transform:rotate(-90deg);overflow:visible}
+.pr-track{fill:none;stroke:var(--s3);stroke-width:7}
+.pr-fill-ej{fill:none;stroke-width:7;stroke-linecap:round;stroke:url(#gr-ej);
+  stroke-dasharray:283;stroke-dashoffset:283;transition:stroke-dashoffset 1.3s cubic-bezier(.4,0,.2,1)}
+.pr-fill-lo{fill:none;stroke-width:7;stroke-linecap:round;stroke:url(#gr-lo);
+  stroke-dasharray:283;stroke-dashoffset:283;transition:stroke-dashoffset 1.3s cubic-bezier(.4,0,.2,1)}
+.pr-txt{fill:var(--text);font-weight:800;font-size:11px;text-anchor:middle}
+.pr-sub{fill:var(--t3);font-size:6.5px;text-anchor:middle}
+
+/* ══════ TOAST ══════ */
+.toast-wrap{position:fixed;bottom:18px;right:12px;z-index:999;display:flex;flex-direction:column;gap:6px;pointer-events:none}
+.toast{background:var(--text);color:var(--surface);padding:8px 13px;border-radius:var(--rs);
+  font-size:.74rem;font-weight:600;box-shadow:var(--sh4);pointer-events:auto;animation:tIn .25s ease both}
+.toast.out{animation:tOut .25s ease both}
+@keyframes tIn{from{transform:translateY(12px);opacity:0}to{transform:translateY(0);opacity:1}}
+@keyframes tOut{from{opacity:1}to{transform:translateY(8px);opacity:0}}
+
+/* ══════ MODAL ══════ */
+.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.45);display:none;
+  align-items:center;justify-content:center;z-index:500;padding:14px}
+.modal-bg.open{display:flex}
+.modal{background:var(--surface);border-radius:var(--rl);box-shadow:var(--sh4);
+  width:100%;max-width:460px;padding:20px;position:relative;animation:mIn .2s ease}
+@keyframes mIn{from{transform:scale(.93);opacity:0}to{transform:scale(1);opacity:1}}
+.modal-x{position:absolute;top:11px;right:13px;background:none;border:none;font-size:1.1rem;cursor:pointer;color:var(--t3)}
+.modal-x:hover{color:var(--red-l)}
+.modal-title{font-size:.95rem;font-weight:800;color:var(--text);margin-bottom:13px}
+.set-row{display:flex;align-items:center;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--border);font-size:.78rem}
+.set-row:last-of-type{border-bottom:none;padding-bottom:0}
+.set-lbl{font-weight:600;color:var(--t2)}.set-sub{font-size:.67rem;color:var(--t4);margin-top:2px}
+.sw{position:relative;width:36px;height:20px;flex-shrink:0}
+.sw input{opacity:0;width:0;height:0;position:absolute}
+.sw-tr{position:absolute;inset:0;background:var(--bd2);border-radius:999px;cursor:pointer;transition:background .2s}
+.sw-tr::before{content:'';position:absolute;width:16px;height:16px;left:2px;top:2px;background:#fff;border-radius:50%;transition:transform .2s}
+.sw input:checked+.sw-tr{background:var(--gold)}
+.sw input:checked+.sw-tr::before{transform:translateX(16px)}
+
+/* ══════ CHART ══════ */
+.chart-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.chart-svg{display:block;min-width:300px;width:100%}
+
+/* ══════ PRINT ══════ */
+@media print{.topbar,.toast-wrap,.modal-bg,.btn-ref,.icobtn,.ham{display:none!important}
+  .page{padding:0}.tab{display:block!important}.game-panel{display:block!important}}
+
+/* ══════ UTIL ══════ */
+.mb0{margin-bottom:0!important}.mt8{margin-top:8px}.mt12{margin-top:12px}
+.sep{display:flex;align-items:center;gap:7px;margin:11px 0;color:var(--t4);font-size:.68rem}
+.sep::before,.sep::after{content:'';flex:1;height:1px;background:var(--border)}
+.tc{text-align:center}
+::-webkit-scrollbar{width:5px;height:5px}::-webkit-scrollbar-thumb{background:var(--bd2);border-radius:3px}
+</style>
+</head>
+<body>
+
+<!-- ════ TOPBAR ════ -->
+<nav class="topbar">
+  <div class="tbi">
+    <a class="logo" href="#" onclick="return false">
+      <div class="logo-ico">🎱</div>
+      <div><div class="logo-name">Lotto Tracker 2026</div><div class="logo-sub">Eurojackpot &amp; 6aus49</div></div>
+    </a>
+    <button class="ham" id="hamBtn" onclick="toggleNav()" aria-label="Menü"><span></span><span></span><span></span></button>
+    <!-- GAME SELECTOR -->
+    <div class="game-tabs">
+      <button class="game-tab ej-active" id="gtEJ" onclick="switchGame('ej')">🎱 Eurojackpot</button>
+      <button class="game-tab" id="gtLO" onclick="switchGame('lo')">🔴 Lotto 6aus49</button>
+    </div>
+    <!-- NAV -->
+    <div class="tb-nav" id="topNav">
+      <button class="nb ej-nb active" onclick="goTab('overview',this)">🏠 Übersicht</button>
+      <button class="nb ej-nb" onclick="goTab('draws',this)">📋 Ziehungen</button>
+      <button class="nb ej-nb" onclick="goTab('stats',this)">📊 Statistik</button>
+      <button class="nb ej-nb" onclick="goTab('generator',this)">🎲 Generator</button>
+      <button class="nb ej-nb" onclick="goTab('checker',this)">✅ Gewinncheck</button>
+      <button class="nb ej-nb" onclick="goTab('quiz',this)">🧠 Quiz</button>
+      <button class="nb ej-nb" onclick="goTab('infos',this)">📖 Infos</button>
+    </div>
+    <div class="tb-right">
+      <div class="dt-box" title="Aktuelle Zeit">
+        <div class="dt-time" id="dt-time">--:--:--</div>
+        <div class="dt-date" id="dt-date">Mittwoch, 27. Mai 2026</div>
+      </div>
+      <div class="live"><span class="live-dot"></span>LIVE</div>
+      <button class="btn-ref ej-ref" id="refBtn" onclick="doRefresh()">
+        <span class="ref-ico" id="refIco">🔄</span><span class="ref-txt">Aktualisieren</span>
+      </button>
+      <button class="icobtn" id="darkBtn" onclick="toggleDark()" title="Dark/Light">🌙</button>
+      <button class="icobtn" onclick="openSettings()" title="Einstellungen">⚙️</button>
+    </div>
+  </div>
+</nav>
+
+<div class="toast-wrap" id="toasts"></div>
+
+<!-- ════ SETTINGS MODAL ════ -->
+<div class="modal-bg" id="settingsModal">
+  <div class="modal">
+    <button class="modal-x" onclick="closeSettings()">✕</button>
+    <div class="modal-title">⚙️ Einstellungen</div>
+    <div class="set-row">
+      <div><div class="set-lbl">🌙 Dark Mode</div><div class="set-sub">Dunkles Design</div></div>
+      <label class="sw"><input type="checkbox" id="sw-dark" onchange="toggleDark()"><span class="sw-tr"></span></label>
+    </div>
+    <div class="set-row">
+      <div><div class="set-lbl">✨ Animationen</div><div class="set-sub">Übergänge ein/aus</div></div>
+      <label class="sw"><input type="checkbox" id="sw-anim" checked onchange="toggleAnim()"><span class="sw-tr"></span></label>
+    </div>
+    <div class="set-row">
+      <div><div class="set-lbl">🗑 Alle Daten löschen</div><div class="set-sub">Favoriten, Tipps, Highscore</div></div>
+      <button class="btn btn-ghost btn-xs" onclick="resetData()">Löschen</button>
+    </div>
+    <div style="margin-top:13px;display:flex;gap:7px">
+      <button class="btn btn-outline btn-sm" onclick="exportCSV()">⬇ CSV</button>
+      <button class="btn btn-outline btn-sm" onclick="printPage()">🖨 Drucken</button>
+      <button class="btn btn-ej btn-sm" onclick="closeSettings()">Schließen</button>
+    </div>
+  </div>
+</div>
+
+<!-- ════ PAGE ════ -->
+<div class="page">
+
+<!-- ════════════════════════════════════
+  EUROJACKPOT PANEL
+════════════════════════════════════ -->
+<div id="game-ej" class="game-panel active">
+
+  <!-- ──── ÜBERSICHT ──── -->
+  <div id="ej-overview" class="tab active">
+    <div class="game-strip gs-ej">
+      <span>🎱 Eurojackpot — Stand: 27. Mai 2026</span>
+      <div class="gs-tabs">
+        <button class="gs-tab ej-t active" onclick="goTab('draws',null)">Ziehungen</button>
+        <button class="gs-tab ej-t" onclick="goTab('stats',null)">Statistik</button>
+        <button class="gs-tab ej-t" onclick="goTab('generator',null)">Generator</button>
+      </div>
+    </div>
+    <!-- Jackpot won banner -->
+    <div class="notice n-success">
+      <span>🏆</span>
+      <span><strong>Jackpot geknackt!</strong> Di, 26.05.2026 — 120 Mio. € gewonnen · 5–11–23–33–42 + Euro: 10–12 · Nächster Jackpot startet bei 10 Mio. €</span>
+    </div>
+    <div class="hero-ej">
+      <div class="hero-eye">🎱 Eurojackpot — Nächste Ziehung: Fr, 29. Mai 2026</div>
+      <div class="hero-amt">10.000.000 €</div>
+      <div class="hero-sub">Neuer Jackpot nach Zwangsausschüttung — steigt mit jeder Ziehung!</div>
+      <div class="hero-tags">
+        <span class="hero-tag">⚡ Di &amp; Fr ~20:00 Uhr</span>
+        <span class="hero-tag">📍 Helsinki</span>
+        <span class="hero-tag">🌍 18 Länder</span>
+        <span class="hero-tag">🎟 2 € / Feld</span>
+      </div>
+    </div>
+    <div class="dl-bar">
+      <span class="dl-lbl">Annahmeschluss EJ:</span>
+      <span class="dl-pill dp-r"><span class="dl-dot" style="background:var(--red-l)"></span>Lotto24 — 18:35 Uhr</span>
+      <span class="dl-pill dp-o"><span class="dl-dot" style="background:var(--orange)"></span>Lottohelden — 19:10 Uhr</span>
+      <span class="dl-pill dp-b"><span class="dl-dot" style="background:var(--blue)"></span>Ziehung — ~20:00 Uhr MEZ</span>
+    </div>
+    <div class="g2">
+      <div class="card cp">
+        <div class="ch"><div class="ct">⏱ Countdown — Eurojackpot</div><span class="bdg bg" id="ej-cd-lbl">Fr, 29. Mai</span></div>
+        <div class="cd-grid" id="ej-cd-boxes">
+          <div class="cd-box"><div class="cd-num" id="ej-d">00</div><div class="cd-unit">Tage</div></div>
+          <div class="cd-box"><div class="cd-num" id="ej-h">00</div><div class="cd-unit">Std</div></div>
+          <div class="cd-box"><div class="cd-num" id="ej-m">00</div><div class="cd-unit">Min</div></div>
+          <div class="cd-box"><div class="cd-num" id="ej-s">00</div><div class="cd-unit">Sek</div></div>
+        </div>
+        <div style="font-size:.65rem;color:var(--t4);text-align:center;margin-top:4px">Freitag, 29. Mai 2026 · ~20:00 Uhr MEZ</div>
+      </div>
+      <div class="card cp">
+        <div class="ch">
+          <div class="ct">🎯 Letzte EJ-Ziehung</div>
+          <div style="display:flex;gap:5px">
+            <span class="bdg bgn">🏆 Jackpot!</span>
+            <button class="btn btn-outline btn-xs" onclick="copyLast('ej')">📋</button>
+          </div>
+        </div>
+        <div class="brow" id="ej-latest-balls" style="margin-bottom:8px"></div>
+        <div style="display:flex;gap:10px;font-size:.69rem;color:var(--t3);flex-wrap:wrap;margin-top:5px">
+          <span id="ej-ov-sum">–</span><span id="ej-ov-eo">–</span><span id="ej-ov-lh">–</span>
+        </div>
+      </div>
+    </div>
+    <div class="g4">
+      <div class="sm"><div class="sm-ico">🔥</div><div class="sm-lbl">Heißeste Zahl</div><div class="sm-val" id="ej-hot">–</div><div class="sm-sub" id="ej-hots">–</div><div class="trend t-up" id="ej-hott"></div></div>
+      <div class="sm"><div class="sm-ico">❄️</div><div class="sm-lbl">Kälteste Zahl</div><div class="sm-val" id="ej-cold">–</div><div class="sm-sub" id="ej-colds">–</div><div class="trend t-dn" id="ej-coldt"></div></div>
+      <div class="sm"><div class="sm-ico">🔵</div><div class="sm-lbl">Top Eurozahl</div><div class="sm-val" id="ej-euro">–</div><div class="sm-sub" id="ej-euros">–</div><div class="trend t-up" id="ej-eurot"></div></div>
+      <div class="sm"><div class="sm-ico">➕</div><div class="sm-lbl">Ø Summe</div><div class="sm-val" id="ej-avg">–</div><div class="sm-sub">Hauptzahlen · 11 Ziehungen</div><div class="trend t-nt">Analyse</div></div>
+    </div>
+    <div class="g2">
+      <div class="card cp">
+        <div class="ch"><div class="ct">📈 Jackpot-Meter</div><span class="bdg bgn">Neustart</span></div>
+        <div class="ring-wrap">
+          <svg class="pr-svg" width="100" height="100" viewBox="0 0 100 100">
+            <defs>
+              <linearGradient id="gr-ej" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#F5C842"/><stop offset="100%" stop-color="#B8860B"/>
+              </linearGradient>
+            </defs>
+            <circle class="pr-track" cx="50" cy="50" r="45"/>
+            <circle class="pr-fill-ej" cx="50" cy="50" r="45" id="ejRing"/>
+            <text class="pr-txt" x="50" y="46" transform="rotate(90,50,50)">8%</text>
+            <text class="pr-sub" x="50" y="57" transform="rotate(90,50,50)">von 120 Mio.</text>
+          </svg>
+          <div style="font-size:.68rem;color:var(--t3);text-align:center">10 Mio. € von max. 120 Mio. €</div>
+        </div>
+      </div>
+      <div class="card cp">
+        <div class="ch"><div class="ct">📅 Nächste EJ-Ziehungen</div></div>
+        <div id="ej-next-list"></div>
+      </div>
+    </div>
+    <div class="card cp mb0">
+      <div class="ct" style="margin-bottom:10px">⚡ Schnellzugriff</div>
+      <div style="display:flex;gap:6px;flex-wrap:wrap">
+        <button class="btn btn-ej btn-sm" onclick="goTab('generator',null);generateTip('ej')">🎲 EJ-Tipp</button>
+        <button class="btn btn-outline btn-sm" onclick="goTab('checker',null)">✅ Zahlen prüfen</button>
+        <button class="btn btn-outline btn-sm" onclick="goTab('stats',null)">📊 Statistik</button>
+        <button class="btn btn-outline btn-sm" onclick="goTab('quiz',null)">🧠 Quiz</button>
+        <button class="btn btn-outline btn-sm" onclick="exportCSV()">⬇ CSV</button>
+        <button class="btn btn-outline btn-sm" onclick="shareApp()">🔗 Teilen</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ──── ZIEHUNGEN EJ ──── -->
+  <div id="ej-draws" class="tab">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;flex-wrap:wrap;gap:8px">
+      <div class="ct" style="font-size:.92rem">📋 Eurojackpot — Ziehungs-Verlauf</div>
+      <div style="display:flex;gap:5px">
+        <button class="btn btn-outline btn-sm" onclick="exportCSV()">⬇ CSV</button>
+        <button class="btn btn-outline btn-sm" onclick="copyAllDraws('ej')">📋 Kopieren</button>
+      </div>
+    </div>
+    <div class="fbar">
+      <button class="fc active-ej" onclick="filterD('ej','all',this)">Alle (11)</button>
+      <button class="fc" onclick="filterD('ej','tue',this)">Dienstag</button>
+      <button class="fc" onclick="filterD('ej','fri',this)">Freitag</button>
+      <button class="fc" onclick="filterD('ej','won',this)">🏆 Jackpot</button>
+      <input class="si" id="ej-search" type="number" min="1" max="50" placeholder="🔍 Zahl…" oninput="searchNum('ej',this.value)"/>
+      <button class="fc" id="ej-sortBtn" onclick="toggleSort('ej')">↓ Neu zuerst</button>
+    </div>
+    <div id="ej-draws-list" class="draws-wrap"></div>
+    <div class="card cp mt12">
+      <div class="ch"><div class="ct">➕ Summen-Chart</div><span class="bdg bg">EJ Hauptzahlen</span></div>
+      <div class="chart-wrap"><svg id="ej-sum-chart" class="chart-svg" height="110" viewBox="0 0 640 110"></svg></div>
+    </div>
+    <div class="card cp mt12"><div class="ch"><div class="ct">🕐 Timeline</div></div><div class="tl" id="ej-timeline"></div></div>
+  </div>
+
+  <!-- ──── STATISTIK EJ ──── -->
+  <div id="ej-stats" class="tab">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;flex-wrap:wrap;gap:8px">
+      <div class="ct" style="font-size:.92rem">📊 Eurojackpot — Zahlen-Analyse</div>
+      <span class="bdg bg">11 Ziehungen · 21.04.–26.05.2026</span>
+    </div>
+    <div class="notice n-info"><span>ℹ️</span><span>Lotto ist reiner Zufall. Vergangenheit hat keinen Einfluss auf Zukunft.</span></div>
+    <div class="g2">
+      <div class="card cp"><div class="ch"><div class="ct">🔥 Heißeste Zahlen</div><span class="bdg br">Top 8</span></div><div class="flist" id="ej-freq-hot"></div></div>
+      <div class="card cp"><div class="ch"><div class="ct">❄️ Kälteste Zahlen</div><span class="bdg bb">Bottom 8</span></div><div class="flist" id="ej-freq-cold"></div></div>
+    </div>
+    <div class="g2">
+      <div class="card cp"><div class="ch"><div class="ct">🔵 Eurozahlen</div><span class="bdg bb">Alle 12</span></div><div class="flist" id="ej-freq-euro"></div></div>
+      <div class="card cp"><div class="ch"><div class="ct">📐 Zahlen-Profil</div></div><div id="ej-profile"></div></div>
+    </div>
+    <div class="card cp" style="margin-bottom:12px">
+      <div class="ch"><div class="ct">🌡️ Heatmap (1–50)</div>
+        <div style="display:flex;gap:4px">
+          <button class="btn btn-outline btn-xs" id="ej-hm-n" onclick="hmSort('ej','num')">1–50</button>
+          <button class="btn btn-outline btn-xs" id="ej-hm-f" onclick="hmSort('ej','freq')">Häufig</button>
+        </div>
+      </div>
+      <div class="heatmap" id="ej-heatmap"></div>
+      <div style="display:flex;align-items:center;gap:7px;margin-top:8px;font-size:.6rem;color:var(--t4)">
+        <span>0×</span><div style="flex:1;height:5px;border-radius:999px;background:linear-gradient(90deg,var(--s3),var(--gold))"></div><span>Häufig</span>
+      </div>
+    </div>
+    <div class="card cp mb0"><div class="ch"><div class="ct">🔗 Häufige Zahlenpaare</div><span class="bdg bp">Analyse</span></div><div id="ej-pairs" style="display:flex;flex-wrap:wrap;gap:6px"></div></div>
+  </div>
+
+  <!-- ──── GENERATOR EJ ──── -->
+  <div id="ej-generator" class="tab">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;flex-wrap:wrap;gap:8px">
+      <div class="ct" style="font-size:.92rem">🎲 Eurojackpot — Tipp-Generator</div>
+      <span class="bdg bg" id="ej-gen-cnt">Generiert: 0</span>
+    </div>
+    <div class="notice n-warn"><span>⚠️</span><span>Zufällig generiert — kein Gewinnversprechen. Verantwortungsvoll spielen.</span></div>
+    <div class="card cp" style="margin-bottom:12px">
+      <div class="ch"><div class="ct">🎯 Dein EJ-Tipp</div><div style="font-size:.68rem;color:var(--t3)">5 aus 50 + 2 aus 12</div></div>
+      <div class="mtabs" id="ej-mode-tabs">
+        <button class="mtab active-ej" onclick="setMode('ej','random',this)">🎲 Zufall</button>
+        <button class="mtab" onclick="setMode('ej','hot',this)">🔥 Heiß</button>
+        <button class="mtab" onclick="setMode('ej','cold',this)">❄️ Kalt</button>
+        <button class="mtab" onclick="setMode('ej','balanced',this)">⚖️ Ausgewogen</button>
+        <button class="mtab" onclick="setMode('ej','lucky',this)">🍀 Gewichtet</button>
+      </div>
+      <div id="ej-mode-desc" style="font-size:.69rem;color:var(--t3);margin-bottom:9px;min-height:15px"></div>
+      <div class="gen-display" id="ej-gen-display">
+        <div class="tb ph">?</div><div class="tb ph">?</div><div class="tb ph">?</div>
+        <div class="tb ph">?</div><div class="tb ph">?</div>
+        <span style="color:var(--t4);margin:0 4px">+</span>
+        <div class="tb ph">?</div><div class="tb ph">?</div>
+      </div>
+      <div style="display:flex;gap:6px;flex-wrap:wrap">
+        <button class="btn btn-ej btn-sm" onclick="generateTip('ej')">🎲 Generieren</button>
+        <button class="btn btn-outline btn-sm" id="ej-save-btn" onclick="saveTip('ej')" disabled>💾 Speichern</button>
+        <button class="btn btn-outline btn-sm" onclick="genMulti('ej',5)">✕5</button>
+        <button class="btn btn-ghost btn-sm" onclick="clearSaved('ej')">🗑</button>
+      </div>
+    </div>
+    <div id="ej-saved-section" style="display:none">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+        <div class="ct">💾 Gespeicherte Tipps <span class="bdg bg" id="ej-saved-cnt">0</span></div>
+        <button class="btn btn-outline btn-sm" onclick="copyAllTips('ej')">📋</button>
+      </div>
+      <div class="card cp mb0"><div id="ej-saved-list" style="display:flex;flex-direction:column;gap:6px"></div></div>
+    </div>
+  </div>
+
+  <!-- ──── GEWINNCHECK EJ ──── -->
+  <div id="ej-checker" class="tab">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;flex-wrap:wrap;gap:8px">
+      <div class="ct" style="font-size:.92rem">✅ Eurojackpot — Gewinncheck</div>
+      <span class="bdg bgn">Letzte: Di, 26.05.2026</span>
+    </div>
+    <div class="card cp" style="margin-bottom:12px">
+      <div class="ch"><div class="ct">📅 Ziehung auswählen</div></div>
+      <select id="ej-chk-sel" onchange="updateChecker('ej')" style="border:1.5px solid var(--bd2);border-radius:999px;padding:4px 10px;font-family:inherit;font-size:.7rem;background:var(--surface);color:var(--text);outline:none;cursor:pointer;margin-bottom:8px"></select>
+      <div style="font-size:.73rem;color:var(--t3)">Gewinnzahlen: <span id="ej-chk-disp" style="font-weight:700"></span></div>
+    </div>
+    <div class="card cp" style="margin-bottom:12px">
+      <div style="font-size:.76rem;font-weight:700;margin-bottom:8px">Hauptzahlen (max. 5) — <span id="ej-chk-mc" style="color:var(--gold)">0</span>/5</div>
+      <div class="chk-g" id="ej-chk-main"></div>
+      <div style="font-size:.76rem;font-weight:700;margin-bottom:8px">Eurozahlen (max. 2) — <span id="ej-chk-ec" style="color:var(--blue)">0</span>/2</div>
+      <div class="chk-eg" id="ej-chk-euro"></div>
+      <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:11px">
+        <button class="btn btn-ej btn-sm" onclick="checkNow('ej')">✅ Prüfen</button>
+        <button class="btn btn-outline btn-sm" onclick="resetChecker('ej')">↩ Reset</button>
+        <button class="btn btn-outline btn-sm" onclick="autoFill('ej')">🎲 Zufällig</button>
+      </div>
+      <div class="chk-res cr-idle" id="ej-chk-res">Wähle Zahlen und klicke auf „Prüfen".</div>
+    </div>
+  </div>
+
+  <!-- ──── QUIZ ──── -->
+  <div id="ej-quiz" class="tab">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;flex-wrap:wrap;gap:8px">
+      <div class="ct" style="font-size:.92rem">🧠 Eurojackpot Quiz</div>
+      <div style="display:flex;gap:5px;align-items:center">
+        <span class="bdg bp">Highscore: <span id="q-hs">0</span></span>
+        <button class="btn btn-outline btn-xs" onclick="startQuiz()">🔄</button>
+      </div>
+    </div>
+    <div style="height:4px;background:var(--s3);border-radius:999px;overflow:hidden;margin-bottom:11px">
+      <div style="height:100%;background:linear-gradient(90deg,var(--gold-l),var(--gold));border-radius:999px;transition:width .4s ease" id="q-pb"></div>
+    </div>
+    <div class="g2">
+      <div class="card cp">
+        <div class="ch">
+          <div class="ct">❓ Frage <span id="q-num">1</span>/<span id="q-tot">10</span></div>
+          <div style="font-size:.73rem;font-weight:700;color:var(--gold)">Punkte: <span id="q-score">0</span></div>
+        </div>
+        <div id="q-text" style="font-size:.86rem;font-weight:600;margin-bottom:13px;line-height:1.5"></div>
+        <div id="q-opts"></div>
+        <div id="q-exp" style="display:none;font-size:.7rem;color:var(--t3);margin-top:8px;padding:8px 10px;background:var(--s2);border-radius:var(--rs);border:1px solid var(--border);line-height:1.5"></div>
+        <div id="q-next" style="display:none;margin-top:10px"><button class="btn btn-ej btn-sm" onclick="nextQ()">Nächste →</button></div>
+      </div>
+      <div class="card cp">
+        <div class="ch"><div class="ct">🏅 Fortschritt</div></div>
+        <div id="q-detail" style="display:flex;flex-direction:column;gap:4px;margin-bottom:11px"></div>
+        <div class="sep">Highscore</div>
+        <div class="tc"><div style="font-size:1.9rem;font-weight:800;color:var(--gold)" id="q-hs2">0</div><div style="font-size:.66rem;color:var(--t3)">Bestes Ergebnis</div></div>
+      </div>
+    </div>
+    <div id="q-result" style="display:none">
+      <div class="card cp tc mt12">
+        <div style="font-size:2rem;margin-bottom:5px" id="q-ri">🎉</div>
+        <div style="font-size:1rem;font-weight:800" id="q-rt"></div>
+        <div style="font-size:.76rem;color:var(--t3);margin:5px 0 13px" id="q-rs"></div>
+        <button class="btn btn-ej btn-sm" onclick="startQuiz()">🔄 Nochmal</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ──── INFOS EJ ──── -->
+  <div id="ej-infos" class="tab">
+    <div style="font-size:.92rem;font-weight:700;margin-bottom:12px" class="ct">📖 Eurojackpot — Infos &amp; Quoten</div>
+    <div class="notice n-success mb0" style="margin-bottom:12px">
+      <span>🏆</span><span><strong>Jackpot geknackt!</strong> 26.05.2026 — 120 Mio. € (5–11–23–33–42 + 10–12). Neuer Start bei 10 Mio. €.</span>
+    </div>
+    <div class="g3">
+      <div class="card cp"><div style="font-size:1.3rem;margin-bottom:5px">🎯</div><div style="font-size:.82rem;font-weight:700;margin-bottom:4px">Spielprinzip</div><div style="font-size:.74rem;color:var(--t3);line-height:1.6"><strong>5 aus 50</strong> + <strong>2 aus 12</strong> Eurozahlen. Ab 3 Richtige = Gewinn.</div></div>
+      <div class="card cp"><div style="font-size:1.3rem;margin-bottom:5px">📅</div><div style="font-size:.82rem;font-weight:700;margin-bottom:4px">Ziehung</div><div style="font-size:.74rem;color:var(--t3);line-height:1.6">Di &amp; Fr · ~20:00 Uhr MEZ · <strong>Helsinki, Finnland</strong></div></div>
+      <div class="card cp"><div style="font-size:1.3rem;margin-bottom:5px">🕐</div><div style="font-size:.82rem;font-weight:700;margin-bottom:4px">Annahmeschluss</div><div style="font-size:.74rem;color:var(--t3);line-height:1.6"><span style="color:var(--red-l);font-weight:700">Lotto24:</span> 18:35<br><span style="color:var(--orange);font-weight:700">Lottohelden:</span> 19:10<br><span style="color:var(--blue);font-weight:700">Ziehung:</span> ~20:00</div></div>
+      <div class="card cp"><div style="font-size:1.3rem;margin-bottom:5px">💶</div><div style="font-size:.82rem;font-weight:700;margin-bottom:4px">Jackpot</div><div style="font-size:.74rem;color:var(--t3);line-height:1.6">Min: <strong>10 Mio.</strong> · Max: <strong>120 Mio. €</strong> · <strong>2 €</strong> / Feld</div></div>
+      <div class="card cp"><div style="font-size:1.3rem;margin-bottom:5px">🌍</div><div style="font-size:.82rem;font-weight:700;margin-bottom:4px">18 Länder</div><div style="font-size:.74rem;color:var(--t3);line-height:1.6">DE·AT·DK·FI·SE·NL·ES·IT·HR·IS·LV·LT·NO·PL·SI·SK·CZ·EE</div></div>
+      <div class="card cp"><div style="font-size:1.3rem;margin-bottom:5px">📊</div><div style="font-size:.82rem;font-weight:700;margin-bottom:4px">Chancen</div><div style="font-size:.74rem;color:var(--t3);line-height:1.6">Jackpot: <strong>1:139,8 Mio.</strong><br>Kleinster Gewinn: <strong>1:26</strong></div></div>
+    </div>
+    <div class="card" style="margin-bottom:12px;overflow:hidden">
+      <div style="padding:13px 14px 0"><div class="ct" style="margin-bottom:11px">🏆 Alle 12 Gewinnklassen</div></div>
+      <div style="overflow-x:auto"><table class="otable"><thead><tr><th>Kl.</th><th>Treffer</th><th>Chance</th><th>Ø Gewinn</th><th>Anteil</th></tr></thead><tbody id="ej-odds-body"></tbody></table></div>
+    </div>
+    <div class="notice n-warn mb0"><span>🛡️</span><span>Verantwortungsvoll spielen. <a href="https://www.bzga.de" target="_blank" style="color:var(--gold);font-weight:600">bzga.de</a> · 0800 1 37 27 00</span></div>
+  </div>
+</div><!-- /game-ej -->
+
+<!-- ════════════════════════════════════
+  LOTTO 6aus49 PANEL
+════════════════════════════════════ -->
+<div id="game-lo" class="game-panel">
+
+  <!-- ──── ÜBERSICHT LOTTO ──── -->
+  <div id="lo-overview" class="tab active">
+    <div class="game-strip gs-lo">
+      <span>🔴 Lotto 6aus49 — Stand: 27. Mai 2026</span>
+      <div class="gs-tabs">
+        <button class="gs-tab lo-t active" onclick="goTab('draws',null)">Ziehungen</button>
+        <button class="gs-tab lo-t" onclick="goTab('stats',null)">Statistik</button>
+        <button class="gs-tab lo-t" onclick="goTab('generator',null)">Generator</button>
+      </div>
+    </div>
+    <div class="hero-lo">
+      <div class="hero-eye">🔴 Lotto 6aus49 — Nächste Ziehung: Mi, 27. Mai 2026</div>
+      <div class="hero-amt">50.000.000 €</div>
+      <div class="hero-sub">17× Rollover — steigt weiter! Annahmeschluss heute um 18:00 Uhr</div>
+      <div class="hero-tags">
+        <span class="hero-tag">⚡ Mi 18:25 Uhr &amp; Sa 19:25 Uhr</span>
+        <span class="hero-tag">📍 Saarbrücken</span>
+        <span class="hero-tag">🇩🇪 Deutschland</span>
+        <span class="hero-tag">🎟 1,20 € / Feld</span>
+      </div>
+    </div>
+    <div class="dl-bar">
+      <span class="dl-lbl">Annahmeschluss 6aus49:</span>
+      <span class="dl-pill dp-r"><span class="dl-dot" style="background:var(--red-l)"></span>Mittwoch — 18:00 Uhr</span>
+      <span class="dl-pill dp-r"><span class="dl-dot" style="background:var(--red-l)"></span>Samstag — 19:00 Uhr</span>
+      <span class="dl-pill dp-b"><span class="dl-dot" style="background:var(--blue)"></span>Ziehung Mi — 18:25 Uhr</span>
+      <span class="dl-pill dp-b"><span class="dl-dot" style="background:var(--blue)"></span>Ziehung Sa — 19:25 Uhr</span>
+    </div>
+    <div class="g2">
+      <div class="card cp">
+        <div class="ch"><div class="ct">⏱ Countdown — Lotto 6aus49</div><span class="bdg bl" id="lo-cd-lbl">Mi, 27. Mai</span></div>
+        <div class="cd-grid">
+          <div class="cd-box lo"><div class="cd-num" id="lo-d">00</div><div class="cd-unit">Tage</div></div>
+          <div class="cd-box lo"><div class="cd-num" id="lo-h">00</div><div class="cd-unit">Std</div></div>
+          <div class="cd-box lo"><div class="cd-num" id="lo-m">00</div><div class="cd-unit">Min</div></div>
+          <div class="cd-box lo"><div class="cd-num" id="lo-s">00</div><div class="cd-unit">Sek</div></div>
+        </div>
+        <div style="font-size:.65rem;color:var(--t4);text-align:center;margin-top:4px">Mittwoch, 27. Mai 2026 · 18:25 Uhr</div>
+      </div>
+      <div class="card cp">
+        <div class="ch">
+          <div class="ct">🎯 Letzte Ziehung</div>
+          <div style="display:flex;gap:5px">
+            <span class="bdg bl">Sa, 23.05.</span>
+            <button class="btn btn-outline btn-xs" onclick="copyLast('lo')">📋</button>
+          </div>
+        </div>
+        <div class="brow" id="lo-latest-balls" style="margin-bottom:8px"></div>
+        <div style="font-size:.69rem;color:var(--t3);margin-top:5px" id="lo-latest-info">–</div>
+      </div>
+    </div>
+    <div class="g4">
+      <div class="sm"><div class="sm-ico">🔥</div><div class="sm-lbl">Heißeste Zahl</div><div class="sm-val" id="lo-hot">–</div><div class="sm-sub" id="lo-hots">–</div><div class="trend t-up" id="lo-hott"></div></div>
+      <div class="sm"><div class="sm-ico">❄️</div><div class="sm-lbl">Kälteste Zahl</div><div class="sm-val" id="lo-cold">–</div><div class="sm-sub" id="lo-colds">–</div><div class="trend t-dn" id="lo-coldt"></div></div>
+      <div class="sm"><div class="sm-ico">🔴</div><div class="sm-lbl">Häuf. Superzahl</div><div class="sm-val" id="lo-sz">–</div><div class="sm-sub" id="lo-szs">–</div><div class="trend t-up" id="lo-szt"></div></div>
+      <div class="sm"><div class="sm-ico">➕</div><div class="sm-lbl">Ø Summe</div><div class="sm-val" id="lo-avg">–</div><div class="sm-sub">Lottozahlen · 10 Ziehungen</div><div class="trend t-nt">Analyse</div></div>
+    </div>
+    <div class="g2">
+      <div class="card cp">
+        <div class="ch"><div class="ct">📈 Jackpot-Meter</div><span class="bdg br">17× Rollover</span></div>
+        <div class="ring-wrap">
+          <svg class="pr-svg" width="100" height="100" viewBox="0 0 100 100">
+            <defs>
+              <linearGradient id="gr-lo" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#EF9A9A"/><stop offset="100%" stop-color="#C62828"/>
+              </linearGradient>
+            </defs>
+            <circle class="pr-track" cx="50" cy="50" r="45"/>
+            <circle class="pr-fill-lo" cx="50" cy="50" r="45" id="loRing"/>
+            <text class="pr-txt" x="50" y="46" transform="rotate(90,50,50)">100%</text>
+            <text class="pr-sub" x="50" y="57" transform="rotate(90,50,50)">von 50 Mio.</text>
+          </svg>
+          <div style="font-size:.68rem;color:var(--red-l);font-weight:700;text-align:center">50 Mio. € — Maximum erreicht!</div>
+        </div>
+      </div>
+      <div class="card cp">
+        <div class="ch"><div class="ct">📅 Nächste Lotto-Ziehungen</div></div>
+        <div id="lo-next-list"></div>
+      </div>
+    </div>
+    <div class="card cp mb0">
+      <div class="ct" style="margin-bottom:10px">⚡ Schnellzugriff</div>
+      <div style="display:flex;gap:6px;flex-wrap:wrap">
+        <button class="btn btn-lo btn-sm" onclick="goTab('generator',null);generateTip('lo')">🎲 Lotto-Tipp</button>
+        <button class="btn btn-outline btn-sm" onclick="goTab('checker',null)">✅ Zahlen prüfen</button>
+        <button class="btn btn-outline btn-sm" onclick="goTab('stats',null)">📊 Statistik</button>
+        <button class="btn btn-outline btn-sm" onclick="exportCSV()">⬇ CSV</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ──── ZIEHUNGEN LOTTO ──── -->
+  <div id="lo-draws" class="tab">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;flex-wrap:wrap;gap:8px">
+      <div class="ct" style="font-size:.92rem">📋 Lotto 6aus49 — Ziehungs-Verlauf</div>
+      <button class="btn btn-outline btn-sm" onclick="copyAllDraws('lo')">📋 Kopieren</button>
+    </div>
+    <div class="fbar">
+      <button class="fc active-lo" onclick="filterD('lo','all',this)">Alle (10)</button>
+      <button class="fc" onclick="filterD('lo','wed',this)">Mittwoch</button>
+      <button class="fc" onclick="filterD('lo','sat',this)">Samstag</button>
+      <input class="si" id="lo-search" type="number" min="1" max="49" placeholder="🔍 Zahl…" oninput="searchNum('lo',this.value)"/>
+      <button class="fc" id="lo-sortBtn" onclick="toggleSort('lo')">↓ Neu zuerst</button>
+    </div>
+    <div id="lo-draws-list" class="draws-wrap"></div>
+    <div class="card cp mt12">
+      <div class="ch"><div class="ct">➕ Summen-Chart</div><span class="bdg bl">6aus49</span></div>
+      <div class="chart-wrap"><svg id="lo-sum-chart" class="chart-svg" height="110" viewBox="0 0 640 110"></svg></div>
+    </div>
+    <div class="card cp mt12"><div class="ch"><div class="ct">🕐 Timeline</div></div><div class="tl" id="lo-timeline"></div></div>
+  </div>
+
+  <!-- ──── STATISTIK LOTTO ──── -->
+  <div id="lo-stats" class="tab">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;flex-wrap:wrap;gap:8px">
+      <div class="ct" style="font-size:.92rem">📊 Lotto 6aus49 — Zahlen-Analyse</div>
+      <span class="bdg bl">10 Ziehungen · Apr–Mai 2026</span>
+    </div>
+    <div class="notice n-info"><span>ℹ️</span><span>Lotto ist reiner Zufall. Die Häufigkeit vergangener Ziehungen hat keinen Einfluss auf Zukunft.</span></div>
+    <div class="g2">
+      <div class="card cp"><div class="ch"><div class="ct">🔥 Heißeste Zahlen</div><span class="bdg br">Top 8</span></div><div class="flist" id="lo-freq-hot"></div></div>
+      <div class="card cp"><div class="ch"><div class="ct">❄️ Kälteste Zahlen</div><span class="bdg bb">Bottom 8</span></div><div class="flist" id="lo-freq-cold"></div></div>
+    </div>
+    <div class="g2">
+      <div class="card cp"><div class="ch"><div class="ct">🔴 Superzahlen</div><span class="bdg bl">0–9</span></div><div class="flist" id="lo-freq-sz"></div></div>
+      <div class="card cp"><div class="ch"><div class="ct">📐 Zahlen-Profil</div></div><div id="lo-profile"></div></div>
+    </div>
+    <div class="card cp" style="margin-bottom:12px">
+      <div class="ch"><div class="ct">🌡️ Heatmap (1–49)</div>
+        <div style="display:flex;gap:4px">
+          <button class="btn btn-outline btn-xs" id="lo-hm-n" onclick="hmSort('lo','num')">1–49</button>
+          <button class="btn btn-outline btn-xs" id="lo-hm-f" onclick="hmSort('lo','freq')">Häufig</button>
+        </div>
+      </div>
+      <div class="heatmap lo" id="lo-heatmap"></div>
+      <div style="display:flex;align-items:center;gap:7px;margin-top:8px;font-size:.6rem;color:var(--t4)">
+        <span>0×</span><div style="flex:1;height:5px;border-radius:999px;background:linear-gradient(90deg,var(--s3),var(--lotto))"></div><span>Häufig</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ──── GENERATOR LOTTO ──── -->
+  <div id="lo-generator" class="tab">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;flex-wrap:wrap;gap:8px">
+      <div class="ct" style="font-size:.92rem">🎲 Lotto 6aus49 — Tipp-Generator</div>
+      <span class="bdg bl" id="lo-gen-cnt">Generiert: 0</span>
+    </div>
+    <div class="notice n-warn"><span>⚠️</span><span>Zufällig generiert — kein Gewinnversprechen.</span></div>
+    <div class="card cp" style="margin-bottom:12px">
+      <div class="ch"><div class="ct">🎯 Dein Lotto-Tipp</div><div style="font-size:.68rem;color:var(--t3)">6 aus 49 + Superzahl (0–9)</div></div>
+      <div class="mtabs" id="lo-mode-tabs">
+        <button class="mtab active-lo" onclick="setMode('lo','random',this)">🎲 Zufall</button>
+        <button class="mtab" onclick="setMode('lo','hot',this)">🔥 Heiß</button>
+        <button class="mtab" onclick="setMode('lo','cold',this)">❄️ Kalt</button>
+        <button class="mtab" onclick="setMode('lo','balanced',this)">⚖️ Ausgewogen</button>
+      </div>
+      <div id="lo-mode-desc" style="font-size:.69rem;color:var(--t3);margin-bottom:9px;min-height:15px"></div>
+      <div class="gen-display" id="lo-gen-display">
+        <div class="tb ph">?</div><div class="tb ph">?</div><div class="tb ph">?</div>
+        <div class="tb ph">?</div><div class="tb ph">?</div><div class="tb ph">?</div>
+        <span style="color:var(--t4);margin:0 4px">SZ:</span>
+        <div class="tb ph">?</div>
+      </div>
+      <div style="display:flex;gap:6px;flex-wrap:wrap">
+        <button class="btn btn-lo btn-sm" onclick="generateTip('lo')">🎲 Generieren</button>
+        <button class="btn btn-outline btn-sm" id="lo-save-btn" onclick="saveTip('lo')" disabled>💾 Speichern</button>
+        <button class="btn btn-outline btn-sm" onclick="genMulti('lo',5)">✕5</button>
+        <button class="btn btn-ghost btn-sm" onclick="clearSaved('lo')">🗑</button>
+      </div>
+    </div>
+    <div id="lo-saved-section" style="display:none">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+        <div class="ct">💾 Gespeicherte Tipps <span class="bdg bl" id="lo-saved-cnt">0</span></div>
+        <button class="btn btn-outline btn-sm" onclick="copyAllTips('lo')">📋</button>
+      </div>
+      <div class="card cp mb0"><div id="lo-saved-list" style="display:flex;flex-direction:column;gap:6px"></div></div>
+    </div>
+  </div>
+
+  <!-- ──── GEWINNCHECK LOTTO ──── -->
+  <div id="lo-checker" class="tab">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;flex-wrap:wrap;gap:8px">
+      <div class="ct" style="font-size:.92rem">✅ Lotto 6aus49 — Gewinncheck</div>
+      <span class="bdg bl">Letzte: Sa, 23.05.2026</span>
+    </div>
+    <div class="card cp" style="margin-bottom:12px">
+      <div class="ch"><div class="ct">📅 Ziehung auswählen</div></div>
+      <select id="lo-chk-sel" onchange="updateChecker('lo')" style="border:1.5px solid var(--bd2);border-radius:999px;padding:4px 10px;font-family:inherit;font-size:.7rem;background:var(--surface);color:var(--text);outline:none;cursor:pointer;margin-bottom:8px"></select>
+      <div style="font-size:.73rem;color:var(--t3)">Gewinnzahlen: <span id="lo-chk-disp" style="font-weight:700"></span></div>
+    </div>
+    <div class="card cp" style="margin-bottom:12px">
+      <div style="font-size:.76rem;font-weight:700;margin-bottom:8px">Lottozahlen (max. 6) — <span id="lo-chk-mc" style="color:var(--lotto)">0</span>/6</div>
+      <div class="chk-lg" id="lo-chk-main"></div>
+      <div style="font-size:.76rem;font-weight:700;margin-bottom:8px">Superzahl (0–9) — <span id="lo-chk-sc" style="color:var(--purple)">–</span></div>
+      <div class="chk-szg" id="lo-chk-sz"></div>
+      <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:11px">
+        <button class="btn btn-lo btn-sm" onclick="checkNow('lo')">✅ Prüfen</button>
+        <button class="btn btn-outline btn-sm" onclick="resetChecker('lo')">↩ Reset</button>
+        <button class="btn btn-outline btn-sm" onclick="autoFill('lo')">🎲 Zufällig</button>
+      </div>
+      <div class="chk-res cr-idle" id="lo-chk-res">Wähle Zahlen und klicke auf „Prüfen".</div>
+    </div>
+    <div class="card cp mb0">
+      <div class="ch mb0"><div class="ct">📋 Gewinnklassen 6aus49</div></div>
+      <div id="lo-win-cls" style="margin-top:9px;display:flex;flex-direction:column;gap:5px"></div>
+    </div>
+  </div>
+
+  <!-- ──── INFOS LOTTO ──── -->
+  <div id="lo-infos" class="tab">
+    <div class="ct" style="font-size:.92rem;margin-bottom:12px">📖 Lotto 6aus49 — Infos &amp; Quoten</div>
+    <div class="g3">
+      <div class="card cp"><div style="font-size:1.3rem;margin-bottom:5px">🎯</div><div style="font-size:.82rem;font-weight:700;margin-bottom:4px">Spielprinzip</div><div style="font-size:.74rem;color:var(--t3);line-height:1.6"><strong>6 aus 49</strong> Zahlen + Superzahl (0–9). Ab 2 Richtige + SZ = Gewinn. 9 Gewinnklassen.</div></div>
+      <div class="card cp"><div style="font-size:1.3rem;margin-bottom:5px">📅</div><div style="font-size:.82rem;font-weight:700;margin-bottom:4px">Ziehung</div><div style="font-size:.74rem;color:var(--t3);line-height:1.6">Mi: <strong>18:25 Uhr</strong> · Sa: <strong>19:25 Uhr</strong><br><strong>Saarbrücken</strong></div></div>
+      <div class="card cp"><div style="font-size:1.3rem;margin-bottom:5px">🕐</div><div style="font-size:.82rem;font-weight:700;margin-bottom:4px">Annahmeschluss</div><div style="font-size:.74rem;color:var(--t3);line-height:1.6"><strong>Mittwoch:</strong> ~18:00 Uhr<br><strong>Samstag:</strong> ~19:00 Uhr</div></div>
+      <div class="card cp"><div style="font-size:1.3rem;margin-bottom:5px">💶</div><div style="font-size:.82rem;font-weight:700;margin-bottom:4px">Jackpot</div><div style="font-size:.74rem;color:var(--t3);line-height:1.6">Min: <strong>10 Mio.</strong> · Max: <strong>50 Mio. €</strong><br><strong>1,20 €</strong> / Feld</div></div>
+      <div class="card cp"><div style="font-size:1.3rem;margin-bottom:5px">🇩🇪</div><div style="font-size:.82rem;font-weight:700;margin-bottom:4px">Nur Deutschland</div><div style="font-size:.74rem;color:var(--t3);line-height:1.6">Nationales Lotto, nur für Spieler in Deutschland. ARD &amp; ZDF-Übertragung.</div></div>
+      <div class="card cp"><div style="font-size:1.3rem;margin-bottom:5px">📊</div><div style="font-size:.82rem;font-weight:700;margin-bottom:4px">Chancen</div><div style="font-size:.74rem;color:var(--t3);line-height:1.6">Jackpot: <strong>1:139,8 Mio.</strong><br>Kleinster Gewinn: <strong>1:35</strong></div></div>
+    </div>
+    <div class="card" style="margin-bottom:12px;overflow:hidden">
+      <div style="padding:13px 14px 0"><div class="ct" style="margin-bottom:11px">🏆 Alle 9 Gewinnklassen</div></div>
+      <div style="overflow-x:auto"><table class="otable"><thead><tr><th>Kl.</th><th>Treffer</th><th>Chance</th><th>Ø Gewinn</th><th>Anteil</th></tr></thead><tbody id="lo-odds-body"></tbody></table></div>
+    </div>
+    <div class="notice n-warn mb0"><span>🛡️</span><span>Verantwortungsvoll spielen. <a href="https://www.bzga.de" target="_blank" style="color:var(--gold);font-weight:600">bzga.de</a> · 0800 1 37 27 00</span></div>
+  </div>
+
+</div><!-- /game-lo -->
+
+<div style="border-top:1px solid var(--border);margin-top:32px;padding-top:14px;text-align:center;font-size:.67rem;color:var(--t4);line-height:1.9">
+  <p>Quellen: lotto.net · euro-jackpot.net · lottohelden.de · lotto-sh.de · Angaben ohne Gewähr</p>
+  <p>Stand: 27. Mai 2026 · Kein offizielles Lotto-Angebot · Nur zu Informationszwecken</p>
+</div>
+</div><!-- /page -->
+
+<script>
+'use strict';
+const $ = id => document.getElementById(id);
+const pad = n => String(n).padStart(2,'0');
+const shuffle = a => [...a].sort(()=>Math.random()-.5);
+const pickR = (pool,n) => shuffle(pool).slice(0,n).sort((a,b)=>a-b);
+
+/* ════ DATA — EUROJACKPOT ════ */
+const EJ_DRAWS = [
+  {date:'26.05.2026',day:'Dienstag', main:[5,11,23,33,42], euro:[10,12], jackpot:true,  jp:'120 Mio. €'},
+  {date:'22.05.2026',day:'Freitag',  main:[5,34,35,42,46], euro:[3,5],   jackpot:false, jp:'120 Mio. €'},
+  {date:'19.05.2026',day:'Dienstag', main:[10,36,37,39,47],euro:[5,6],   jackpot:false, jp:'118 Mio. €'},
+  {date:'15.05.2026',day:'Freitag',  main:[1,32,33,36,37], euro:[7,12],  jackpot:false, jp:'102 Mio. €'},
+  {date:'12.05.2026',day:'Dienstag', main:[7,15,19,28,35], euro:[3,11],  jackpot:false, jp:'87 Mio. €'},
+  {date:'08.05.2026',day:'Freitag',  main:[3,17,18,31,41], euro:[6,12],  jackpot:false, jp:'72 Mio. €'},
+  {date:'05.05.2026',day:'Dienstag', main:[1,30,33,34,43], euro:[5,10],  jackpot:false, jp:'58 Mio. €'},
+  {date:'01.05.2026',day:'Freitag',  main:[10,11,13,16,27],euro:[5,7],   jackpot:false, jp:'44 Mio. €'},
+  {date:'28.04.2026',day:'Dienstag', main:[19,20,41,43,46],euro:[5,7],   jackpot:false, jp:'35 Mio. €'},
+  {date:'24.04.2026',day:'Freitag',  main:[6,21,29,39,44], euro:[1,5],   jackpot:false, jp:'26 Mio. €'},
+  {date:'21.04.2026',day:'Dienstag', main:[31,32,36,39,47],euro:[7,8],   jackpot:false, jp:'17 Mio. €'},
+];
+
+const EJ_NEXT = [
+  {short:'Fr, 29. Mai', label:'Freitag, 29. Mai 2026',   ts: new Date('2026-05-29T20:00:00+02:00').getTime()},
+  {short:'Di, 02. Jun', label:'Dienstag, 02. Juni 2026', ts: new Date('2026-06-02T20:00:00+02:00').getTime()},
+  {short:'Fr, 05. Jun', label:'Freitag, 05. Juni 2026',  ts: new Date('2026-06-05T20:00:00+02:00').getTime()},
+  {short:'Di, 09. Jun', label:'Dienstag, 09. Juni 2026', ts: new Date('2026-06-09T20:00:00+02:00').getTime()},
+  {short:'Fr, 12. Jun', label:'Freitag, 12. Juni 2026',  ts: new Date('2026-06-12T20:00:00+02:00').getTime()},
+];
+
+const EJ_ODDS = [
+  {cl:1,h:'5+2E',ch:'1:139.838.160',w:'Jackpot',p:100},
+  {cl:2,h:'5+1E',ch:'1:6.991.908',w:'~500.000€',p:55},
+  {cl:3,h:'5+0E',ch:'1:3.107.515',w:'~100.000€',p:42},
+  {cl:4,h:'4+2E',ch:'1:621.503',w:'~3.000€',p:32},
+  {cl:5,h:'4+1E',ch:'1:31.075',w:'~200€',p:22},
+  {cl:6,h:'4+0E',ch:'1:13.811',w:'~70€',p:16},
+  {cl:7,h:'3+2E',ch:'1:14.125',w:'~50€',p:13},
+  {cl:8,h:'2+2E',ch:'1:985',w:'~20€',p:9},
+  {cl:9,h:'3+1E',ch:'1:706',w:'~20€',p:9},
+  {cl:10,h:'3+0E',ch:'1:314',w:'~15€',p:7},
+  {cl:11,h:'1+2E',ch:'1:188',w:'~10€',p:5},
+  {cl:12,h:'2+1E',ch:'1:26',w:'~10€',p:3},
+];
+
+const EJ_WIN_CL = [
+  {m:5,e:2,cl:1,w:'Jackpot!'},{m:5,e:1,cl:2,w:'~500.000€'},{m:5,e:0,cl:3,w:'~100.000€'},
+  {m:4,e:2,cl:4,w:'~3.000€'},{m:4,e:1,cl:5,w:'~200€'},{m:4,e:0,cl:6,w:'~70€'},
+  {m:3,e:2,cl:7,w:'~50€'},{m:2,e:2,cl:8,w:'~20€'},{m:3,e:1,cl:9,w:'~20€'},
+  {m:3,e:0,cl:10,w:'~15€'},{m:1,e:2,cl:11,w:'~10€'},{m:2,e:1,cl:12,w:'~10€'},
+];
+
+/* ════ DATA — LOTTO 6aus49 ════ */
+const LO_DRAWS = [
+  {date:'23.05.2026',day:'Samstag',   nums:[2,6,8,11,14,39], sz:7,  jp:'48 Mio. €'},
+  {date:'20.05.2026',day:'Mittwoch',  nums:[3,14,34,39,46,48],sz:5,  jp:'44 Mio. €'},
+  {date:'16.05.2026',day:'Samstag',   nums:[7,11,20,23,27,30],sz:9,  jp:'42 Mio. €'},
+  {date:'13.05.2026',day:'Mittwoch',  nums:[4,8,17,22,31,45], sz:3,  jp:'38 Mio. €'},
+  {date:'09.05.2026',day:'Samstag',   nums:[2,3,12,36,39,43], sz:8,  jp:'36 Mio. €'},
+  {date:'06.05.2026',day:'Mittwoch',  nums:[10,13,19,38,40,48],sz:2, jp:'33 Mio. €'},
+  {date:'02.05.2026',day:'Samstag',   nums:[1,5,9,20,21,32],  sz:5,  jp:'31 Mio. €'},
+  {date:'29.04.2026',day:'Mittwoch',  nums:[1,15,25,37,43,47],sz:4,  jp:'28 Mio. €'},
+  {date:'25.04.2026',day:'Samstag',   nums:[6,12,15,20,35,49],sz:9,  jp:'26 Mio. €'},
+  {date:'22.04.2026',day:'Mittwoch',  nums:[7,16,24,33,38,44],sz:1,  jp:'22 Mio. €'},
+];
+
+const LO_NEXT = [
+  {short:'Mi, 27. Mai', label:'Mittwoch, 27. Mai 2026',  ts: new Date('2026-05-27T18:25:00+02:00').getTime()},
+  {short:'Sa, 30. Mai', label:'Samstag, 30. Mai 2026',   ts: new Date('2026-05-30T19:25:00+02:00').getTime()},
+  {short:'Mi, 03. Jun', label:'Mittwoch, 03. Juni 2026', ts: new Date('2026-06-03T18:25:00+02:00').getTime()},
+  {short:'Sa, 06. Jun', label:'Samstag, 06. Juni 2026',  ts: new Date('2026-06-06T19:25:00+02:00').getTime()},
+  {short:'Mi, 10. Jun', label:'Mittwoch, 10. Juni 2026', ts: new Date('2026-06-10T18:25:00+02:00').getTime()},
+];
+
+const LO_ODDS = [
+  {cl:1,h:'6+SZ',   ch:'1:139.838.160',w:'Jackpot',p:100},
+  {cl:2,h:'6',      ch:'1:15.537.573', w:'~1.000.000€',p:65},
+  {cl:3,h:'5+SZ',   ch:'1:542.008',    w:'~20.000€',   p:40},
+  {cl:4,h:'5',      ch:'1:60.223',     w:'~4.000€',    p:28},
+  {cl:5,h:'4+SZ',   ch:'1:10.324',     w:'~150€',      p:18},
+  {cl:6,h:'4',      ch:'1:1.148',      w:'~40€',       p:11},
+  {cl:7,h:'3+SZ',   ch:'1:567',        w:'~15€',       p:8},
+  {cl:8,h:'3',      ch:'1:63',         w:'~10€',       p:5},
+  {cl:9,h:'2+SZ',   ch:'1:35',         w:'~6€',        p:3},
+];
+
+const LO_WIN_CL = [
+  {m:6,sz:true, cl:1,w:'Jackpot!'},{m:6,sz:false,cl:2,w:'~1.000.000€'},
+  {m:5,sz:true, cl:3,w:'~20.000€'},{m:5,sz:false,cl:4,w:'~4.000€'},
+  {m:4,sz:true, cl:5,w:'~150€'},  {m:4,sz:false,cl:6,w:'~40€'},
+  {m:3,sz:true, cl:7,w:'~15€'},   {m:3,sz:false,cl:8,w:'~10€'},
+  {m:2,sz:true, cl:9,w:'~6€'},
+];
+
+/* ════ FREQ ════ */
+const calcFreq = arr => {
+  const m={};arr.forEach(n=>{m[n]=(m[n]||0)+1});
+  return Object.entries(m).map(([n,c])=>({num:+n,cnt:c})).sort((a,b)=>b.cnt-a.cnt);
+};
+const ejAllM = EJ_DRAWS.flatMap(d=>d.main), ejAllE = EJ_DRAWS.flatMap(d=>d.euro);
+const ejFM = calcFreq(ejAllM), ejFE = calcFreq(ejAllE);
+const ejFmMap = Object.fromEntries(ejFM.map(x=>[x.num,x.cnt]));
+const loAllN = LO_DRAWS.flatMap(d=>d.nums), loAllSZ = LO_DRAWS.map(d=>d.sz);
+const loFN = calcFreq(loAllN), loFSZ = calcFreq(loAllSZ);
+const loFnMap = Object.fromEntries(loFN.map(x=>[x.num,x.cnt]));
+
+/* ════ HELPERS ════ */
+function toast(msg,dur=2600){
+  const w=$('toasts'),t=document.createElement('div');
+  t.className='toast';t.textContent=msg;w.appendChild(t);
+  setTimeout(()=>{t.classList.add('out');setTimeout(()=>t.remove(),320)},dur);
+}
+function mkBall(n,type,sz=''){
+  const d=document.createElement('div');
+  d.className='ball '+type+(sz?' '+sz:'');d.textContent=n;return d;
+}
+function dlFile(content,name,type){
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(new Blob([content],{type}));a.download=name;a.click();
+}
+function renderFreqList(id,arr,cls,ballType,topN=8){
+  const el=$(id);if(!el)return;el.innerHTML='';
+  const top=arr.slice(0,topN),max=top[0]?.cnt||1;
+  top.forEach(({num,cnt})=>{
+    const pct=Math.round(cnt/max*100);
+    const div=document.createElement('div');div.className='frow';
+    div.innerHTML=`<div class="ball sm ${ballType}">${num}</div>
+      <div class="ftrack"><div class="ffill ${cls}" data-w="${pct}%" style="width:0"></div></div>
+      <div class="fcnt">${cnt}×</div><div class="fpct">${pct}%</div>`;
+    el.appendChild(div);
+  });
+  setTimeout(()=>el.querySelectorAll('.ffill').forEach(b=>b.style.width=b.dataset.w),100);
+}
+
+/* ════ CLOCK ════ */
+const DAYS=['Sonntag','Montag','Dienstag','Mittwoch','Donnerstag','Freitag','Samstag'];
+const MONTHS=['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'];
+function updateClock(){
+  const now=new Date();
+  const te=$('dt-time'),de=$('dt-date');
+  if(te)te.textContent=pad(now.getHours())+':'+pad(now.getMinutes())+':'+pad(now.getSeconds());
+  if(de)de.textContent=DAYS[now.getDay()]+', '+now.getDate()+'. '+MONTHS[now.getMonth()]+' '+now.getFullYear();
+}
+updateClock();setInterval(updateClock,1000);
+
+/* ════ COUNTDOWN — EUROJACKPOT ════ */
+function getNextEJ(){return EJ_NEXT.find(d=>d.ts>Date.now())||EJ_NEXT[EJ_NEXT.length-1]}
+let _ejS=-1;
+function tickEJ(){
+  const nx=getNextEJ();
+  const lbl=$('ej-cd-lbl');if(lbl)lbl.textContent=nx.short;
+  const diff=Math.max(0,nx.ts-Date.now());
+  const s=Math.floor(diff/1000)%60;
+  if(s!==_ejS){_ejS=s;const el=$('ej-s');if(el){el.classList.remove('pulse');void el.offsetWidth;el.classList.add('pulse')}}
+  $('ej-d')&&($('ej-d').textContent=pad(Math.floor(diff/86400000)));
+  $('ej-h')&&($('ej-h').textContent=pad(Math.floor(diff%86400000/3600000)));
+  $('ej-m')&&($('ej-m').textContent=pad(Math.floor(diff%3600000/60000)));
+  $('ej-s')&&($('ej-s').textContent=pad(s));
+}
+tickEJ();setInterval(tickEJ,1000);
+
+/* ════ COUNTDOWN — LOTTO ════ */
+function getNextLO(){return LO_NEXT.find(d=>d.ts>Date.now())||LO_NEXT[LO_NEXT.length-1]}
+let _loS=-1;
+function tickLO(){
+  const nx=getNextLO();
+  const lbl=$('lo-cd-lbl');if(lbl)lbl.textContent=nx.short;
+  const diff=Math.max(0,nx.ts-Date.now());
+  const s=Math.floor(diff/1000)%60;
+  if(s!==_loS){_loS=s;const el=$('lo-s');if(el){el.classList.remove('pulse');void el.offsetWidth;el.classList.add('pulse')}}
+  $('lo-d')&&($('lo-d').textContent=pad(Math.floor(diff/86400000)));
+  $('lo-h')&&($('lo-h').textContent=pad(Math.floor(diff%86400000/3600000)));
+  $('lo-m')&&($('lo-m').textContent=pad(Math.floor(diff%3600000/60000)));
+  $('lo-s')&&($('lo-s').textContent=pad(s));
+}
+tickLO();setInterval(tickLO,1000);
+
+/* ════ INIT OVERVIEW — EJ ════ */
+(function initEJOverview(){
+  const lb=$('ej-latest-balls');
+  if(lb){lb.innerHTML='';EJ_DRAWS[0].main.forEach(n=>lb.appendChild(mkBall(n,'m','lg')));
+    const sep=document.createElement('span');sep.className='bsep';sep.textContent='+';lb.appendChild(sep);
+    EJ_DRAWS[0].euro.forEach(n=>lb.appendChild(mkBall(n,'e','lg')));}
+  const d0=EJ_DRAWS[0],s=d0.main.reduce((a,b)=>a+b,0);
+  const ev=d0.main.filter(n=>n%2===0).length,lo=d0.main.filter(n=>n<=25).length;
+  if($('ej-ov-sum'))$('ej-ov-sum').textContent='∑ '+s;
+  if($('ej-ov-eo'))$('ej-ov-eo').textContent=ev+'g/'+(5-ev)+'u';
+  if($('ej-ov-lh'))$('ej-ov-lh').textContent=lo+'n/'+(5-lo)+'h';
+  const hot=ejFM[0],cold=[...ejFM].sort((a,b)=>a.cnt-b.cnt)[0],euro=ejFE[0];
+  const avg=Math.round(EJ_DRAWS.reduce((a,d)=>a+d.main.reduce((x,y)=>x+y,0),0)/EJ_DRAWS.length);
+  const sv=(id,v)=>{const e=$(id);if(e)e.textContent=v};
+  sv('ej-hot',hot.num);sv('ej-hots',hot.cnt+'× in 11 Ziehungen');sv('ej-hott','▲ '+hot.cnt+'×');
+  sv('ej-cold',cold.num);sv('ej-colds',cold.cnt+'× in 11 Ziehungen');sv('ej-coldt','▼ '+cold.cnt+'×');
+  sv('ej-euro',euro.num);sv('ej-euros',euro.cnt+'× in 11 Ziehungen');sv('ej-eurot','▲ '+euro.cnt+'×');
+  sv('ej-avg',avg);
+  // Ring 10/120 = 8%
+  const pr=$('ejRing');if(pr){const c=2*Math.PI*45;pr.style.strokeDasharray=c;pr.style.strokeDashoffset=c*(1-10/120);}
+  // Next list
+  const nl=$('ej-next-list');if(nl){const now=Date.now();
+    EJ_NEXT.slice(0,5).forEach((nd,i)=>{
+      const diff=nd.ts-now,lbl=diff>0?'in '+Math.floor(diff/86400000)+'T '+Math.floor(diff%86400000/3600000)+'h':'Heute';
+      const div=document.createElement('div');
+      div.style.cssText='display:flex;align-items:center;justify-content:space-between;padding:7px 0;border-bottom:'+(i<4?'1px solid var(--border)':'none')+';font-size:.76rem';
+      div.innerHTML='<span style="font-weight:600;color:var(--text)">'+nd.label+'</span><span style="color:var(--t4);font-size:.68rem">'+lbl+'</span>';
+      nl.appendChild(div);
+    });}
+})();
+
+/* ════ INIT OVERVIEW — LOTTO ════ */
+(function initLOOverview(){
+  const lb=$('lo-latest-balls');
+  if(lb){lb.innerHTML='';
+    LO_DRAWS[0].nums.forEach(n=>lb.appendChild(mkBall(n,'l6','lg')));
+    const sep=document.createElement('span');sep.style.cssText='margin:0 4px;font-size:.72rem;color:var(--t4);font-weight:600';sep.textContent='SZ:';lb.appendChild(sep);
+    lb.appendChild(mkBall(LO_DRAWS[0].sz,'sz','lg'));}
+  if($('lo-latest-info'))$('lo-latest-info').textContent='Jackpot: '+LO_DRAWS[0].jp+' · Superzahl: '+LO_DRAWS[0].sz;
+  const hot=loFN[0],cold=[...loFN].sort((a,b)=>a.cnt-b.cnt)[0],szTop=loFSZ[0];
+  const avg=Math.round(LO_DRAWS.reduce((a,d)=>a+d.nums.reduce((x,y)=>x+y,0),0)/LO_DRAWS.length);
+  const sv=(id,v)=>{const e=$(id);if(e)e.textContent=v};
+  sv('lo-hot',hot.num);sv('lo-hots',hot.cnt+'× in 10 Ziehungen');sv('lo-hott','▲ '+hot.cnt+'×');
+  sv('lo-cold',cold.num);sv('lo-colds',cold.cnt+'× in 10 Ziehungen');sv('lo-coldt','▼ '+cold.cnt+'×');
+  sv('lo-sz',szTop.num);sv('lo-szs',szTop.cnt+'× in 10 Ziehungen');sv('lo-szt','▲ '+szTop.cnt+'×');
+  sv('lo-avg',avg);
+  // Ring 50/50 = 100%
+  const pr=$('loRing');if(pr){const c=2*Math.PI*45;pr.style.strokeDasharray=c;pr.style.strokeDashoffset=0;}
+  // Next list
+  const nl=$('lo-next-list');if(nl){const now=Date.now();
+    LO_NEXT.slice(0,5).forEach((nd,i)=>{
+      const diff=nd.ts-now,lbl=diff>0?'in '+Math.floor(diff/86400000)+'T '+Math.floor(diff%86400000/3600000)+'h':'Heute';
+      const div=document.createElement('div');
+      div.style.cssText='display:flex;align-items:center;justify-content:space-between;padding:7px 0;border-bottom:'+(i<4?'1px solid var(--border)':'none')+';font-size:.76rem';
+      div.innerHTML='<span style="font-weight:600;color:var(--text)">'+nd.label+'</span><span style="color:var(--t4);font-size:.68rem">'+lbl+'</span>';
+      nl.appendChild(div);
+    });}
+})();
+
+/* ════ DRAWS ════ */
+let state={ej:{filter:'all',search:'',sortAsc:false},lo:{filter:'all',search:'',sortAsc:false}};
+
+function renderEJDraws(){
+  const wrap=$('ej-draws-list');if(!wrap)return;wrap.innerHTML='';
+  let list=EJ_DRAWS.map((d,i)=>({...d,i}));
+  if(state.ej.sortAsc)list=[...list].reverse();
+  const avgS=Math.round(EJ_DRAWS.reduce((a,d)=>a+d.main.reduce((x,y)=>x+y,0),0)/EJ_DRAWS.length);
+  let shown=0;
+  list.forEach(({date,day,main,euro,jackpot,jp,i})=>{
+    if(state.ej.filter==='tue'&&day!=='Dienstag')return;
+    if(state.ej.filter==='fri'&&day!=='Freitag')return;
+    if(state.ej.filter==='won'&&!jackpot)return;
+    if(state.ej.search){const n=parseInt(state.ej.search);if(!isNaN(n)&&!main.includes(n)&&!euro.includes(n))return;}
+    shown++;
+    const row=document.createElement('div');
+    row.className='draw-row'+(jackpot?' won':(i===0?' latest-ej':''));
+    const meta=document.createElement('div');meta.className='dr-meta';
+    meta.innerHTML='<div class="dr-idx">#'+(EJ_DRAWS.length-i)+'</div><div class="dr-date">'+date+'</div><div class="dr-day">'+day+'</div>';
+    const balls=document.createElement('div');balls.className='dr-balls';
+    main.forEach(n=>{const b=mkBall(n,'m');if(state.ej.search&&parseInt(state.ej.search)===n){b.style.boxShadow='0 0 0 3px var(--gold)';b.style.transform='scale(1.13)'}balls.appendChild(b)});
+    const sep=document.createElement('span');sep.className='bsep';sep.textContent='+';balls.appendChild(sep);
+    euro.forEach(n=>{const b=mkBall(n,'e');if(state.ej.search&&parseInt(state.ej.search)===n){b.style.boxShadow='0 0 0 3px var(--blue)';b.style.transform='scale(1.13)'}balls.appendChild(b)});
+    const sum=main.reduce((a,b)=>a+b,0);
+    const info=document.createElement('div');info.className='dr-info';
+    info.innerHTML='∑ '+sum+'<br><span style="color:'+(sum>=avgS?'var(--green)':'var(--blue)')+';">'+(sum>=avgS?'▲':'▼')+'Ø'+avgS+'</span>';
+    row.append(meta,balls,info);
+    if(jackpot){const t=document.createElement('div');t.className='won-tag';t.textContent='🏆 Jackpot';row.appendChild(t);}
+    else if(i===0){const t=document.createElement('div');t.className='latest-tag-ej';t.textContent='Aktuell';row.appendChild(t);}
+    wrap.appendChild(row);
+  });
+  if(!shown)wrap.innerHTML='<div style="text-align:center;padding:20px;color:var(--t4);font-size:.78rem">Keine Ergebnisse.</div>';
+}
+
+function renderLODraws(){
+  const wrap=$('lo-draws-list');if(!wrap)return;wrap.innerHTML='';
+  let list=LO_DRAWS.map((d,i)=>({...d,i}));
+  if(state.lo.sortAsc)list=[...list].reverse();
+  const avgS=Math.round(LO_DRAWS.reduce((a,d)=>a+d.nums.reduce((x,y)=>x+y,0),0)/LO_DRAWS.length);
+  let shown=0;
+  list.forEach(({date,day,nums,sz,jp,i})=>{
+    if(state.lo.filter==='wed'&&day!=='Mittwoch')return;
+    if(state.lo.filter==='sat'&&day!=='Samstag')return;
+    if(state.lo.search){const n=parseInt(state.lo.search);if(!isNaN(n)&&!nums.includes(n)&&sz!==n)return;}
+    shown++;
+    const row=document.createElement('div');
+    row.className='draw-row lo-row'+(i===0?' latest-lo':'');
+    const meta=document.createElement('div');meta.className='dr-meta';
+    meta.innerHTML='<div class="dr-idx">#'+(LO_DRAWS.length-i)+'</div><div class="dr-date">'+date+'</div><div class="dr-day">'+day+'</div>';
+    const balls=document.createElement('div');balls.className='dr-balls';
+    nums.forEach(n=>{const b=mkBall(n,'l6');if(state.lo.search&&parseInt(state.lo.search)===n){b.style.boxShadow='0 0 0 3px var(--lotto)';b.style.transform='scale(1.13)'}balls.appendChild(b)});
+    const sepEl=document.createElement('span');sepEl.className='sz-label';sepEl.textContent='SZ:';balls.appendChild(sepEl);
+    const szBall=mkBall(sz,'sz');balls.appendChild(szBall);
+    const sum=nums.reduce((a,b)=>a+b,0);
+    const info=document.createElement('div');info.className='dr-info';
+    info.innerHTML='∑ '+sum+'<br><span style="font-size:.64rem;color:var(--t4)">JP: '+jp+'</span>';
+    row.append(meta,balls,info);
+    if(i===0){const t=document.createElement('div');t.className='latest-tag-lo';t.textContent='Aktuell';row.appendChild(t);}
+    wrap.appendChild(row);
+  });
+  if(!shown)wrap.innerHTML='<div style="text-align:center;padding:20px;color:var(--t4);font-size:.78rem">Keine Ergebnisse.</div>';
+}
+
+function filterD(game,type,btn){
+  state[game].filter=type;
+  const allBtns=btn.closest('.fbar').querySelectorAll('.fc:not(#'+game+'-sortBtn)');
+  allBtns.forEach(b=>b.classList.remove('active-ej','active-lo'));
+  btn.classList.add(game==='ej'?'active-ej':'active-lo');
+  game==='ej'?renderEJDraws():renderLODraws();
+}
+function searchNum(game,v){state[game].search=v.trim();game==='ej'?renderEJDraws():renderLODraws();}
+function toggleSort(game){
+  state[game].sortAsc=!state[game].sortAsc;
+  $(game+'-sortBtn').textContent=state[game].sortAsc?'↑ Alt zuerst':'↓ Neu zuerst';
+  game==='ej'?renderEJDraws():renderLODraws();
+}
+renderEJDraws();renderLODraws();
+
+/* Timelines */
+function renderTimeline(game){
+  const tl=$(game+'-timeline');if(!tl)return;tl.innerHTML='';
+  const draws=game==='ej'?EJ_DRAWS:LO_DRAWS;
+  draws.forEach((d,i)=>{
+    const item=document.createElement('div');item.className='tl-item';
+    const left=document.createElement('div');left.className='tl-l';
+    const dot=document.createElement('div');
+    dot.className='tl-dot'+(i===0?' first':'')+(d.jackpot?' won-dot':' '+(game==='ej'?'ej-dot':'lo-dot'));
+    const line=document.createElement('div');line.className='tl-line';
+    left.append(dot,line);
+    const c=document.createElement('div');c.className='tl-c';
+    const dl=document.createElement('div');dl.className='tl-date';
+    dl.textContent=d.day+', '+d.date+(d.jackpot?' 🏆':'');
+    const br=document.createElement('div');br.className='brow';
+    if(game==='ej'){
+      d.main.forEach(n=>br.appendChild(mkBall(n,'m','sm')));
+      const s=document.createElement('span');s.className='bsep';s.textContent='+';br.appendChild(s);
+      d.euro.forEach(n=>br.appendChild(mkBall(n,'e','sm')));
+    }else{
+      d.nums.forEach(n=>br.appendChild(mkBall(n,'l6','sm')));
+      const s=document.createElement('span');s.className='sz-label';s.style.fontSize='.6rem';s.textContent='SZ:';br.appendChild(s);
+      br.appendChild(mkBall(d.sz,'sz','sm'));
+    }
+    c.append(dl,br);item.append(left,c);tl.appendChild(item);
+  });
+}
+renderTimeline('ej');renderTimeline('lo');
+
+/* Sum charts */
+function renderSumChart(game){
+  const svgEl=$(game+'-sum-chart');if(!svgEl)return;
+  const draws=game==='ej'?EJ_DRAWS:LO_DRAWS;
+  const sums=draws.map(d=>game==='ej'?d.main.reduce((a,b)=>a+b,0):d.nums.reduce((a,b)=>a+b,0));
+  const avg=Math.round(sums.reduce((a,b)=>a+b,0)/sums.length);
+  const maxS=Math.max(...sums),minS=Math.min(...sums),range=maxS-minS||1;
+  const W=640,H=110,pd=26,bW=Math.floor((W-pd*2)/sums.length)-5;
+  const c1=game==='ej'?'#F5C842':'#EF9A9A',c2=game==='ej'?'#B8860B':'#C62828';
+  let h=`<defs>
+    <linearGradient id="cg-${game}-a" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="${c1}"/><stop offset="100%" stop-color="${c2}"/></linearGradient>
+    <linearGradient id="cg-${game}-b" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#93C5FD"/><stop offset="100%" stop-color="#2563EB"/></linearGradient>
+  </defs>`;
+  const avgY=H-pd-(avg-minS)/range*(H-pd*2);
+  h+=`<line x1="${pd}" y1="${avgY}" x2="${W-pd}" y2="${avgY}" stroke="var(--bd2)" stroke-dasharray="4,3" stroke-width="1.5"/>`;
+  h+=`<text x="${W-pd+3}" y="${avgY+4}" font-size="7.5" fill="var(--t4)">Ø${avg}</text>`;
+  sums.forEach((s,i)=>{
+    const d=draws[i];const x=pd+i*(bW+5),bH=Math.max(5,(s-minS)/range*(H-pd*2)+6),y=H-pd-bH;
+    h+=`<rect x="${x}" y="${y}" width="${bW}" height="${bH}" rx="3" fill="${s>=avg?'url(#cg-'+game+'-a)':'url(#cg-'+game+'-b)'}" opacity=".88"/>`;
+    h+=`<text x="${x+bW/2}" y="${H-6}" font-size="7" fill="var(--t4)" text-anchor="middle">${d.date.slice(0,5)}</text>`;
+    h+=`<text x="${x+bW/2}" y="${y-3}" font-size="7" fill="var(--t3)" text-anchor="middle" font-weight="700">${s}${d.jackpot?'🏆':''}</text>`;
+  });
+  svgEl.innerHTML=h;
+}
+renderSumChart('ej');renderSumChart('lo');
+
+/* ════ STATS EJ ════ */
+renderFreqList('ej-freq-hot',  ejFM,'fg','m',8);
+renderFreqList('ej-freq-cold', [...ejFM].sort((a,b)=>a.cnt-b.cnt),'fgr','m',8);
+renderFreqList('ej-freq-euro', ejFE,'fb','e',12);
+/* EJ Profile */
+(function(){
+  const el=$('ej-profile');if(!el)return;
+  const avg=Math.round(ejAllM.reduce((a,b)=>a+b,0)/ejAllM.length*10)/10;
+  const ev=ejAllM.filter(n=>n%2===0).length,lo=ejAllM.filter(n=>n<=25).length;
+  [['Ø Zahlenwert',avg,'von 1–50'],['Gerade',ev+'/'+ejAllM.length,Math.round(ev/ejAllM.length*100)+'%'],
+   ['Ungerade',(ejAllM.length-ev)+'/'+ejAllM.length,Math.round((ejAllM.length-ev)/ejAllM.length*100)+'%'],
+   ['Niedrig (1–25)',lo+'/'+ejAllM.length,Math.round(lo/ejAllM.length*100)+'%'],
+   ['Hoch (26–50)',(ejAllM.length-lo)+'/'+ejAllM.length,Math.round((ejAllM.length-lo)/ejAllM.length*100)+'%']
+  ].forEach(([l,v,s],i,a)=>{
+    el.innerHTML+=`<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:${i<a.length-1?'1px solid var(--border)':'none'};font-size:.73rem">
+      <span style="color:var(--t3)">${l}</span><span style="font-weight:700">${v} <span style="color:var(--t4);font-size:.68rem">${s}</span></span></div>`;
+  });
+})();
+/* EJ Heatmap */
+let ejHmMode='num';
+function buildEJHeatmap(){
+  const hm=$('ej-heatmap');if(!hm)return;
+  const max=ejFM[0]?.cnt||1;
+  let nums=Array.from({length:50},(_,i)=>i+1);
+  if(ejHmMode==='freq')nums=[...ejFM.map(x=>x.num),...nums.filter(n=>!ejFmMap[n])];
+  hm.innerHTML='';
+  nums.forEach(n=>{
+    const cnt=ejFmMap[n]||0,t=cnt/max;
+    const r=Math.round(229+t*(248-229)),g=Math.round(231+t*(200-231)),b=Math.round(235+t*(10-235));
+    const cell=document.createElement('div');cell.className='hmc';
+    cell.style.cssText=`background:rgb(${r},${g},${b});border:1.5px solid rgb(${Math.round(r*.87)},${Math.round(g*.87)},${Math.round(b*.87)});color:${t>.35?'#5C3A00':'var(--t4)'}`;
+    cell.innerHTML=n+'<div class="hmc-tip">'+n+'×: '+cnt+' gezogen</div>';
+    hm.appendChild(cell);
+  });
+}
+function hmSort(game,m){
+  if(game==='ej'){ejHmMode=m;buildEJHeatmap();}
+  else{loHmMode=m;buildLOHeatmap();}
+}
+buildEJHeatmap();
+/* EJ Pairs */
+(function(){
+  const el=$('ej-pairs');if(!el)return;
+  const pm={};
+  EJ_DRAWS.forEach(d=>{for(let i=0;i<d.main.length;i++)for(let j=i+1;j<d.main.length;j++){const k=d.main[i]+'-'+d.main[j];pm[k]=(pm[k]||0)+1}});
+  const top=Object.entries(pm).filter(([,v])=>v>1).sort((a,b)=>b[1]-a[1]).slice(0,10);
+  if(!top.length){el.textContent='Keine mehrfachen Paare.';return;}
+  top.forEach(([pair,cnt])=>{
+    const[a,b]=pair.split('-');const div=document.createElement('div');
+    div.style.cssText='display:inline-flex;align-items:center;gap:4px;background:var(--surface);border:1px solid var(--border);border-radius:var(--rs);padding:5px 8px;font-size:.7rem;font-weight:600';
+    div.innerHTML=`<span style="color:var(--gold)">${a}</span><span style="color:var(--t4)">+</span><span style="color:var(--gold)">${b}</span><span class="bdg bg" style="margin-left:2px;font-size:.57rem">${cnt}×</span>`;
+    el.appendChild(div);
+  });
+})();
+
+/* ════ STATS LOTTO ════ */
+renderFreqList('lo-freq-hot',  loFN,'fr','l6',8);
+renderFreqList('lo-freq-cold', [...loFN].sort((a,b)=>a.cnt-b.cnt),'fgr','l6',8);
+renderFreqList('lo-freq-sz',   loFSZ,'fp','sz',10);
+/* LO Profile */
+(function(){
+  const el=$('lo-profile');if(!el)return;
+  const avg=Math.round(loAllN.reduce((a,b)=>a+b,0)/loAllN.length*10)/10;
+  const ev=loAllN.filter(n=>n%2===0).length,lo=loAllN.filter(n=>n<=25).length;
+  [['Ø Zahlenwert',avg,'von 1–49'],['Gerade',ev+'/'+loAllN.length,Math.round(ev/loAllN.length*100)+'%'],
+   ['Ungerade',(loAllN.length-ev)+'/'+loAllN.length,Math.round((loAllN.length-ev)/loAllN.length*100)+'%'],
+   ['Niedrig (1–25)',lo+'/'+loAllN.length,Math.round(lo/loAllN.length*100)+'%'],
+   ['Hoch (26–49)',(loAllN.length-lo)+'/'+loAllN.length,Math.round((loAllN.length-lo)/loAllN.length*100)+'%']
+  ].forEach(([l,v,s],i,a)=>{
+    el.innerHTML+=`<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:${i<a.length-1?'1px solid var(--border)':'none'};font-size:.73rem">
+      <span style="color:var(--t3)">${l}</span><span style="font-weight:700">${v} <span style="color:var(--t4);font-size:.68rem">${s}</span></span></div>`;
+  });
+})();
+/* LO Heatmap */
+let loHmMode='num';
+function buildLOHeatmap(){
+  const hm=$('lo-heatmap');if(!hm)return;
+  const max=loFN[0]?.cnt||1;
+  let nums=Array.from({length:49},(_,i)=>i+1);
+  if(loHmMode==='freq')nums=[...loFN.map(x=>x.num),...nums.filter(n=>!loFnMap[n])];
+  hm.innerHTML='';
+  nums.forEach(n=>{
+    const cnt=loFnMap[n]||0,t=cnt/max;
+    const r=Math.round(229+t*(229-229)),g=Math.round(231+t*(57-231)),b=Math.round(235+t*(53-235));
+    const cell=document.createElement('div');cell.className='hmc';
+    cell.style.cssText=`background:rgb(${255-Math.round(t*120)},${Math.round(229-t*180)},${Math.round(235-t*180)});border:1.5px solid rgba(0,0,0,.1);color:${t>.35?'#fff':'var(--t4)'}`;
+    cell.innerHTML=n+'<div class="hmc-tip">'+n+': '+cnt+'× gezogen</div>';
+    hm.appendChild(cell);
+  });
+}
+buildLOHeatmap();
+
+/* ════ ODDS TABLES ════ */
+(function(){
+  const tb=$('ej-odds-body');if(!tb)return;
+  EJ_ODDS.forEach(({cl,h,ch,w,p})=>{
+    tb.innerHTML+=`<tr><td><span class="cl-n ej${cl===1?' top':''}">${cl}</span></td><td>${h}</td>
+      <td style="color:var(--t3)">${ch}</td>
+      <td><div class="wbar"><span>${w}</span><div class="wbtrack"><div class="wbfill-ej" style="width:${p}%"></div></div></div></td></tr>`;
+  });
+})();
+(function(){
+  const tb=$('lo-odds-body');if(!tb)return;
+  LO_ODDS.forEach(({cl,h,ch,w,p})=>{
+    tb.innerHTML+=`<tr><td><span class="cl-n lo${cl===1?' top':''}">${cl}</span></td><td>${h}</td>
+      <td style="color:var(--t3)">${ch}</td>
+      <td><div class="wbar"><span>${w}</span><div class="wbtrack"><div class="wbfill-lo" style="width:${p}%"></div></div></div></td></tr>`;
+  });
+  const wc=$('lo-win-cls');if(!wc)return;
+  LO_WIN_CL.slice(0,6).forEach(({m,sz,cl,w})=>{
+    wc.innerHTML+=`<div style="display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:1px solid var(--border);font-size:.72rem">
+      <span class="cl-n lo${cl===1?' top':''}">${cl}</span>
+      <span style="color:var(--t2)">${m} Richtige${sz?' + Superzahl':''}</span>
+      <span style="margin-left:auto;font-weight:700;color:var(--lotto)">${w}</span></div>`;
+  });
+  wc.innerHTML+='<div style="font-size:.66rem;color:var(--t4);margin-top:4px">…und 3 weitere Gewinnklassen</div>';
+})();
+
+/* ════ GENERATOR ════ */
+const genState={ej:{mode:'random',tips:[],cnt:0},lo:{mode:'random',tips:[],cnt:0}};
+const EJ_MODES={random:'Vollständig zufällige Auswahl aus allen 50/12 Zahlen.',hot:'Bevorzugt häufig gezogene Zahlen.',cold:'Bevorzugt selten gezogene Zahlen.',balanced:'Mix aus heißen und kalten Zahlen.',lucky:'Statistisch gewichtete Auswahl.'};
+const LO_MODES={random:'Zufällige Auswahl aus allen 49 Zahlen + Superzahl.',hot:'Bevorzugt häufig gezogene Zahlen.',cold:'Bevorzugt selten gezogene Zahlen.',balanced:'Mix aus heißen und kalten Zahlen.'};
+let curTips={ej:null,lo:null};
+
+function setMode(game,m,btn){
+  genState[game].mode=m;
+  btn.closest('.mtabs').querySelectorAll('.mtab').forEach(b=>b.classList.remove('active-ej','active-lo'));
+  btn.classList.add(game==='ej'?'active-ej':'active-lo');
+  const d=$(game+'-mode-desc');if(d)d.textContent=(game==='ej'?EJ_MODES:LO_MODES)[m];
+}
+function generateTip(game){
+  const dis=$(game+'-gen-display');if(!dis)return;
+  const mode=genState[game].mode;
+  let balls,sz=null;
+  if(game==='ej'){
+    const allN=Array.from({length:50},(_,i)=>i+1),allE=Array.from({length:12},(_,i)=>i+1);
+    let mp,ep;
+    switch(mode){
+      case 'hot':mp=ejFM.slice(0,18).map(x=>x.num);ep=ejFE.slice(0,6).map(x=>x.num);break;
+      case 'cold':mp=[...ejFM].sort((a,b)=>a.cnt-b.cnt).slice(0,20).map(x=>x.num);ep=[...ejFE].sort((a,b)=>a.cnt-b.cnt).slice(0,6).map(x=>x.num);
+        if(mp.length<5)allN.filter(n=>!mp.includes(n)).forEach(n=>mp.push(n));
+        if(ep.length<2)allE.filter(n=>!ep.includes(n)).forEach(n=>ep.push(n));break;
+      case 'balanced':mp=[...ejFM.slice(0,10).map(x=>x.num),...ejFM.slice(-15).map(x=>x.num),...allN.filter(n=>!ejFmMap[n])];ep=[...ejFE.slice(0,4).map(x=>x.num),...allE.filter(n=>!ejFE.find(x=>x.num===n))];break;
+      case 'lucky':mp=[];const p=[...allN];while(mp.length<5){const w=p.map(n=>1+(ejFmMap[n]||0)*.5),t=w.reduce((a,b)=>a+b);let r=Math.random()*t,c=0;for(let i=0;i<p.length;i++){c+=w[i];if(r<=c){mp.push(p.splice(i,1)[0]);break}}}mp.sort((a,b)=>a-b);ep=pickR(allE,2);break;
+      default:mp=allN;ep=allE;
+    }
+    const main=pickR(mp,5),euro=pickR(ep,2);
+    curTips.ej={main,euro,mode};balls={main,euro};
+    genState.ej.cnt++;$(game+'-gen-cnt').textContent='Generiert: '+genState.ej.cnt;
+    dis.innerHTML='';dis.classList.remove('has-lo');dis.classList.add('has-ej');
+    main.forEach((n,i)=>{const b=document.createElement('div');b.className='tb m pop';b.style.animationDelay=(i*50)+'ms';b.textContent=n;dis.appendChild(b)});
+    const sp=document.createElement('span');sp.style.cssText='color:var(--t4);margin:0 4px';sp.textContent='+';dis.appendChild(sp);
+    euro.forEach((n,i)=>{const b=document.createElement('div');b.className='tb e pop';b.style.animationDelay=((5+i)*50)+'ms';b.textContent=n;dis.appendChild(b)});
+  }else{
+    const allN=Array.from({length:49},(_,i)=>i+1);
+    let mp;
+    switch(mode){
+      case 'hot':mp=loFN.slice(0,18).map(x=>x.num);break;
+      case 'cold':mp=[...loFN].sort((a,b)=>a.cnt-b.cnt).slice(0,20).map(x=>x.num);if(mp.length<6)allN.filter(n=>!mp.includes(n)).forEach(n=>mp.push(n));break;
+      case 'balanced':mp=[...loFN.slice(0,10).map(x=>x.num),...loFN.slice(-15).map(x=>x.num),...allN.filter(n=>!loFnMap[n])];break;
+      default:mp=allN;
+    }
+    const main6=pickR(mp,6);const szVal=Math.floor(Math.random()*10);
+    curTips.lo={nums:main6,sz:szVal,mode};balls={nums:main6,sz:szVal};
+    genState.lo.cnt++;$(game+'-gen-cnt').textContent='Generiert: '+genState.lo.cnt;
+    dis.innerHTML='';dis.classList.remove('has-ej');dis.classList.add('has-lo');
+    main6.forEach((n,i)=>{const b=document.createElement('div');b.className='tb l6g pop';b.style.animationDelay=(i*45)+'ms';b.textContent=n;dis.appendChild(b)});
+    const sp=document.createElement('span');sp.style.cssText='color:var(--t4);margin:0 4px;font-size:.82rem;font-weight:600';sp.textContent='SZ:';dis.appendChild(sp);
+    const sb=document.createElement('div');sb.className='tb szg pop';sb.style.animationDelay='320ms';sb.textContent=szVal;dis.appendChild(sb);
+  }
+  const btn=$(game+'-save-btn');if(btn)btn.disabled=false;
+}
+function genMulti(game,count){for(let i=0;i<count;i++){generateTip(game);const t=curTips[game];if(t)genState[game].tips.push({...t,id:Date.now()+i});}renderSaved(game);toast('✅ '+count+' Tipps gespeichert');const b=$(game+'-save-btn');if(b)b.disabled=true;}
+function saveTip(game){const t=curTips[game];if(!t)return;genState[game].tips.push({...t,id:Date.now()});renderSaved(game);toast('💾 Tipp gespeichert!');const b=$(game+'-save-btn');if(b)b.disabled=true;}
+function clearSaved(game){genState[game].tips=[];renderSaved(game);toast('🗑 Gelöscht');}
+function copyAllTips(game){
+  const tips=genState[game].tips;if(!tips.length){toast('Keine Tipps');return;}
+  const txt=tips.map((t,i)=>game==='ej'?'Tipp '+(i+1)+': '+t.main.join(', ')+' + '+t.euro.join(', '):'Tipp '+(i+1)+': '+t.nums.join(', ')+' SZ:'+t.sz).join('\n');
+  navigator.clipboard?.writeText(txt).then(()=>toast('📋 Kopiert!')).catch(()=>toast('Fehler'));
+}
+function renderSaved(game){
+  const sec=$(game+'-saved-section'),list=$(game+'-saved-list'),cnt=$(game+'-saved-cnt');
+  if(!sec||!list)return;
+  const tips=genState[game].tips;
+  if(cnt)cnt.textContent=tips.length;
+  if(!tips.length){sec.style.display='none';return;}
+  sec.style.display='block';list.innerHTML='';
+  tips.forEach((t,i)=>{
+    const row=document.createElement('div');row.className='saved-row';
+    const nl=document.createElement('div');nl.style.cssText='font-size:.62rem;font-weight:700;color:var(--t4);min-width:44px';nl.textContent='Tipp '+(i+1);
+    const balls=document.createElement('div');balls.className='brow';balls.style.flex='1';
+    if(game==='ej'){
+      t.main.forEach(n=>balls.appendChild(mkBall(n,'m','sm')));
+      const s=document.createElement('span');s.className='bsep';s.textContent='+';balls.appendChild(s);
+      t.euro.forEach(n=>balls.appendChild(mkBall(n,'e','sm')));
+    }else{
+      t.nums.forEach(n=>balls.appendChild(mkBall(n,'l6','sm')));
+      const s=document.createElement('span');s.className='sz-label';s.style.fontSize='.6rem';s.textContent='SZ:';balls.appendChild(s);
+      balls.appendChild(mkBall(t.sz,'sz','sm'));
+    }
+    const dl=document.createElement('button');dl.className='btn btn-ghost btn-xs';dl.textContent='×';dl.onclick=()=>{genState[game].tips=genState[game].tips.filter(x=>x.id!==t.id);renderSaved(game);};
+    row.append(nl,balls,dl);list.appendChild(row);
+  });
+}
+
+/* ════ CHECKER EJ ════ */
+let ejChkM=new Set(),ejChkE=new Set(),ejChkIdx=0;
+(function initEJChecker(){
+  const sel=$('ej-chk-sel');
+  if(sel)EJ_DRAWS.forEach((d,i)=>{const o=document.createElement('option');o.value=i;o.textContent=d.day+', '+d.date+(d.jackpot?' 🏆':'');sel.appendChild(o);});
+  const mg=$('ej-chk-main');
+  if(mg)for(let n=1;n<=50;n++){const d=document.createElement('div');d.className='cc';d.textContent=n;
+    d.onclick=()=>{if(d.classList.contains('sel-ej')){ejChkM.delete(n);d.classList.remove('sel-ej')}
+      else if(ejChkM.size<5){ejChkM.add(n);d.classList.add('sel-ej')}else toast('⚠️ Max. 5');
+      updEJCnt();resetChkRes('ej')};mg.appendChild(d);}
+  const eg=$('ej-chk-euro');
+  if(eg)for(let n=1;n<=12;n++){const d=document.createElement('div');d.className='cc';d.textContent=n;
+    d.onclick=()=>{if(d.classList.contains('sel-e')){ejChkE.delete(n);d.classList.remove('sel-e')}
+      else if(ejChkE.size<2){ejChkE.add(n);d.classList.add('sel-e')}else toast('⚠️ Max. 2');
+      updEJCnt();resetChkRes('ej')};eg.appendChild(d);}
+  updateChecker('ej');
+})();
+function updEJCnt(){const mc=$('ej-chk-mc'),ec=$('ej-chk-ec');if(mc)mc.textContent=ejChkM.size;if(ec)ec.textContent=ejChkE.size;}
+
+/* ════ CHECKER LOTTO ════ */
+let loChkM=new Set(),loChkSZ=null,loChkIdx=0;
+(function initLOChecker(){
+  const sel=$('lo-chk-sel');
+  if(sel)LO_DRAWS.forEach((d,i)=>{const o=document.createElement('option');o.value=i;o.textContent=d.day+', '+d.date;sel.appendChild(o);});
+  const mg=$('lo-chk-main');
+  if(mg)for(let n=1;n<=49;n++){const d=document.createElement('div');d.className='cc';d.textContent=n;
+    d.onclick=()=>{if(d.classList.contains('sel-lo')){loChkM.delete(n);d.classList.remove('sel-lo')}
+      else if(loChkM.size<6){loChkM.add(n);d.classList.add('sel-lo')}else toast('⚠️ Max. 6');
+      updLOCnt();resetChkRes('lo')};mg.appendChild(d);}
+  const sg=$('lo-chk-sz');
+  if(sg)for(let n=0;n<=9;n++){const d=document.createElement('div');d.className='cc';d.textContent=n;
+    d.onclick=()=>{sg.querySelectorAll('.cc').forEach(c=>c.classList.remove('sel-sz'));loChkSZ=n;d.classList.add('sel-sz');updLOCnt();resetChkRes('lo')};sg.appendChild(d);}
+  updateChecker('lo');
+})();
+function updLOCnt(){const mc=$('lo-chk-mc'),sc=$('lo-chk-sc');if(mc)mc.textContent=loChkM.size;if(sc)sc.textContent=loChkSZ!==null?loChkSZ:'–';}
+
+function updateChecker(game){
+  if(game==='ej'){
+    ejChkIdx=parseInt($('ej-chk-sel')?.value)||0;
+    const d=EJ_DRAWS[ejChkIdx],disp=$('ej-chk-disp');
+    if(disp)disp.innerHTML=d.main.map(n=>'<strong>'+n+'</strong>').join('·')+' + '+d.euro.map(n=>'<strong style="color:var(--blue)">'+n+'</strong>').join('·');
+  }else{
+    loChkIdx=parseInt($('lo-chk-sel')?.value)||0;
+    const d=LO_DRAWS[loChkIdx],disp=$('lo-chk-disp');
+    if(disp)disp.innerHTML=d.nums.map(n=>'<strong>'+n+'</strong>').join('·')+' SZ: <strong style="color:var(--purple)">'+d.sz+'</strong>';
+  }
+  resetChkRes(game);
+}
+function checkNow(game){
+  if(game==='ej'){
+    const d=EJ_DRAWS[ejChkIdx];
+    const mh=[...ejChkM].filter(n=>d.main.includes(n)),eh=[...ejChkE].filter(n=>d.euro.includes(n));
+    document.querySelectorAll('#ej-chk-main .cc').forEach(el=>{el.classList.remove('hit','miss');if(d.main.includes(+el.textContent))el.classList.add(ejChkM.has(+el.textContent)?'hit':'miss')});
+    document.querySelectorAll('#ej-chk-euro .cc').forEach(el=>{el.classList.remove('hit','miss');if(d.euro.includes(+el.textContent))el.classList.add(ejChkE.has(+el.textContent)?'hit':'miss')});
+    const res=$('ej-chk-res');
+    const wc=EJ_WIN_CL.find(w=>w.m===mh.length&&w.e===eh.length);
+    if(wc){res.className='chk-res cr-win';res.innerHTML='🏆 GK '+wc.cl+'! '+mh.length+' Haupt + '+eh.length+' Euro · <strong>'+wc.w+'</strong>';toast('🎊 Gewinnklasse '+wc.cl+' — '+wc.w);}
+    else if(mh.length||eh.length){res.className='chk-res cr-part';res.textContent='✨ '+mh.length+' Haupt + '+eh.length+' Euro richtig — keine Gewinnklasse.';}
+    else{res.className='chk-res cr-lose';res.textContent='❌ Kein Treffer. 🍀 Viel Glück!';}
+  }else{
+    const d=LO_DRAWS[loChkIdx];
+    const mh=[...loChkM].filter(n=>d.nums.includes(n)),szHit=loChkSZ===d.sz;
+    document.querySelectorAll('#lo-chk-main .cc').forEach(el=>{el.classList.remove('hit','miss');if(d.nums.includes(+el.textContent))el.classList.add(loChkM.has(+el.textContent)?'hit':'miss')});
+    document.querySelectorAll('#lo-chk-sz .cc').forEach(el=>{el.classList.remove('hit','miss');if(+el.textContent===d.sz)el.classList.add(loChkSZ===+el.textContent?'hit':'miss')});
+    const res=$('lo-chk-res');
+    const wc=LO_WIN_CL.find(w=>w.m===mh.length&&w.sz===szHit);
+    if(wc){res.className='chk-res cr-win';res.innerHTML='🏆 GK '+wc.cl+'! '+mh.length+' Richtige'+(szHit?' + Superzahl':'')+' · <strong>'+wc.w+'</strong>';toast('🎊 GK '+wc.cl);}
+    else if(mh.length){res.className='chk-res cr-part';res.textContent='✨ '+mh.length+' Richtige'+(szHit?' + Superzahl':'')+' — leider keine Gewinnklasse.';}
+    else{res.className='chk-res cr-lose';res.textContent='❌ Kein Treffer. 🍀 Viel Glück!';}
+  }
+}
+function resetChkRes(game){
+  const r=$(game+'-chk-res');if(r){r.className='chk-res cr-idle';r.textContent='Wähle Zahlen und klicke auf „Prüfen".';}
+  if(game==='ej'){document.querySelectorAll('#ej-chk-main .cc,#ej-chk-euro .cc').forEach(el=>el.classList.remove('hit','miss'));}
+  else{document.querySelectorAll('#lo-chk-main .cc,#lo-chk-sz .cc').forEach(el=>el.classList.remove('hit','miss'));}
+}
+function resetChecker(game){
+  if(game==='ej'){ejChkM.clear();ejChkE.clear();document.querySelectorAll('#ej-chk-main .cc').forEach(el=>el.classList.remove('sel-ej','hit','miss'));document.querySelectorAll('#ej-chk-euro .cc').forEach(el=>el.classList.remove('sel-e','hit','miss'));updEJCnt();}
+  else{loChkM.clear();loChkSZ=null;document.querySelectorAll('#lo-chk-main .cc').forEach(el=>el.classList.remove('sel-lo','hit','miss'));document.querySelectorAll('#lo-chk-sz .cc').forEach(el=>el.classList.remove('sel-sz','hit','miss'));updLOCnt();}
+  resetChkRes(game);
+}
+function autoFill(game){
+  resetChecker(game);
+  if(game==='ej'){
+    const m=pickR(Array.from({length:50},(_,i)=>i+1),5),e=pickR(Array.from({length:12},(_,i)=>i+1),2);
+    m.forEach(n=>{ejChkM.add(n);const el=document.querySelector('#ej-chk-main .cc:nth-child('+n+')');if(el)el.classList.add('sel-ej')});
+    e.forEach(n=>{ejChkE.add(n);const el=document.querySelector('#ej-chk-euro .cc:nth-child('+n+')');if(el)el.classList.add('sel-e')});
+    updEJCnt();
+  }else{
+    const m=pickR(Array.from({length:49},(_,i)=>i+1),6);const sz=Math.floor(Math.random()*10);
+    m.forEach(n=>{loChkM.add(n);const el=document.querySelector('#lo-chk-main .cc:nth-child('+n+')');if(el)el.classList.add('sel-lo')});
+    loChkSZ=sz;const szEl=document.querySelector('#lo-chk-sz .cc:nth-child('+(sz+1)+')');if(szEl)szEl.classList.add('sel-sz');
+    updLOCnt();
+  }
+}
+
+/* ════ QUIZ ════ */
+const QS=[
+  {q:'Wie viele Zahlen wählt man beim Eurojackpot?',o:['4+1','5+2','6+1','5+1'],a:1,e:'5 aus 50 Hauptzahlen + 2 aus 12 Eurozahlen.'},
+  {q:'Was ist der maximale Eurojackpot?',o:['50 Mio.','100 Mio.','120 Mio.','200 Mio.'],a:2,e:'Der EJ-Jackpot ist bei 120 Millionen Euro gedeckelt.'},
+  {q:'An welchen Tagen findet der Eurojackpot statt?',o:['Mo & Do','Di & Fr','Mi & Sa','Di & Sa'],a:1,e:'Dienstag und Freitag in Helsinki.'},
+  {q:'Wann findet Lotto 6aus49 statt?',o:['Mo & Do','Di & Fr','Mi & Sa','Mi & So'],a:2,e:'Mittwoch (18:25 Uhr) und Samstag (19:25 Uhr).'},
+  {q:'Was ist der maximale Lotto 6aus49 Jackpot?',o:['30 Mio.','40 Mio.','50 Mio.','60 Mio.'],a:2,e:'Seit Nov. 2023 liegt die Maximalgrenze bei 50 Millionen Euro.'},
+  {q:'Was kostet ein Lotto 6aus49 Feld?',o:['0,75 €','1,00 €','1,20 €','2,00 €'],a:2,e:'Ein Spielfeld kostet 1,20 Euro zzgl. Bearbeitungsgebühr.'},
+  {q:'Wie viele Länder nehmen am Eurojackpot teil?',o:['10','15','18','22'],a:2,e:'18 europäische Länder.'},
+  {q:'Welche Zahlen wurden am 26.05.2026 beim EJ gezogen?',o:['5–11–23–33–42','5–34–35–42–46','10–36–37–39–47','1–32–33–36–37'],a:0,e:'26.05.2026: 5, 11, 23, 33, 42 + Euro: 10, 12 — Jackpot geknackt!'},
+  {q:'Welche Zahlen wurden am 23.05.2026 beim Lotto gezogen?',o:['2–3–12–36–39–43','7–11–20–23–27–30','3–14–34–39–46–48','2–6–8–11–14–39'],a:3,e:'23.05.2026: 2, 6, 8, 11, 14, 39 + Superzahl: 7'},
+  {q:'Was ist der aktuelle Lotto 6aus49 Jackpot (27.05.2026)?',o:['33 Mio. €','44 Mio. €','50 Mio. €','48 Mio. €'],a:2,e:'Am 27.05.2026 liegt der Jackpot bei 50 Millionen Euro (Maximum!).'},
+];
+let qIdx=0,qScore=0,qAnswered=false,qHistory=[];
+let qHs=0;try{qHs=parseInt(localStorage.getItem('ej_hs')||'0')}catch(e){}
+function startQuiz(){
+  qIdx=0;qScore=0;qAnswered=false;qHistory=[];
+  const qr=$('q-result');if(qr)qr.style.display='none';
+  $('q-score')&&($('q-score').textContent='0');
+  $('q-pb')&&($('q-pb').style.width='0%');
+  renderQ();
+}
+function renderQ(){
+  const q=QS[qIdx];if(!q){showQRes();return;}
+  $('q-pb')&&($('q-pb').style.width=Math.round(qIdx/QS.length*100)+'%');
+  $('q-num')&&($('q-num').textContent=qIdx+1);
+  $('q-tot')&&($('q-tot').textContent=QS.length);
+  $('q-text')&&($('q-text').textContent=q.q);
+  const exp=$('q-exp');if(exp)exp.style.display='none';
+  const nxt=$('q-next');if(nxt)nxt.style.display='none';
+  const opts=$('q-opts');if(!opts)return;opts.innerHTML='';
+  q.o.forEach((o,i)=>{const b=document.createElement('button');b.className='qopt';b.textContent=o;b.onclick=()=>answerQ(i,b,q);opts.appendChild(b)});
+  qAnswered=false;renderQProg();
+}
+function answerQ(i,btn,q){
+  if(qAnswered)return;qAnswered=true;
+  const ok=i===q.a;
+  if(ok){qScore++;btn.classList.add('correct');toast('✅ Richtig! +1')}
+  else{btn.classList.add('wrong');document.querySelectorAll('.qopt')[q.a].classList.add('correct');toast('❌ Falsch')}
+  document.querySelectorAll('.qopt').forEach(b=>b.disabled=true);
+  qHistory.push(ok);$('q-score')&&($('q-score').textContent=qScore);
+  const exp=$('q-exp');if(exp){exp.style.display='block';exp.textContent='💡 '+q.e;}
+  const nxt=$('q-next');if(nxt)nxt.style.display='block';
+  renderQProg();
+}
+function nextQ(){qIdx++;renderQ();}
+function showQRes(){
+  const qr=$('q-result');if(qr)qr.style.display='block';
+  $('q-pb')&&($('q-pb').style.width='100%');
+  if(qScore>qHs){qHs=qScore;try{localStorage.setItem('ej_hs',qHs)}catch(e){}}
+  [$('q-hs'),$('q-hs2')].forEach(el=>{if(el)el.textContent=qHs});
+  const pct=Math.round(qScore/QS.length*100);
+  $('q-ri')&&($('q-ri').textContent=pct===100?'🏆':pct>=80?'🎉':pct>=60?'😊':'😅');
+  $('q-rt')&&($('q-rt').textContent=qScore+'/'+QS.length+' Punkte ('+pct+'%)');
+  $('q-rs')&&($('q-rs').textContent=pct===100?'Perfekt!':pct>=80?'Sehr gut!':pct>=60?'Gut gemacht!':'Übung macht den Meister!');
+  renderQProg();
+}
+function renderQProg(){
+  const el=$('q-detail');if(!el)return;el.innerHTML='';
+  QS.forEach((_,i)=>{
+    const done=i<qHistory.length,ok=done&&qHistory[i];
+    const div=document.createElement('div');div.style.cssText='display:flex;align-items:center;gap:6px;font-size:.69rem';
+    const dot=document.createElement('div');
+    dot.style.cssText='width:13px;height:13px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:.56rem;font-weight:700;background:'+(done?(ok?'var(--green)':'var(--red-l)'):'var(--s3)')+';color:'+(done?'#fff':'var(--t4)')+';border:'+(i===qIdx?'2px solid var(--gold)':'none');
+    dot.textContent=done?(ok?'✓':'✗'):String(i+1);
+    const lbl=document.createElement('span');
+    lbl.style.cssText='color:'+(done?(ok?'var(--green)':'var(--red-l)'):(i===qIdx?'var(--gold)':'var(--t4)'))+';font-weight:'+(i===qIdx?'700':'400');
+    lbl.textContent='Frage '+(i+1);div.append(dot,lbl);el.appendChild(div);
+  });
+}
+(function(){[$('q-hs'),$('q-hs2')].forEach(el=>{if(el)el.textContent=qHs});})();
+startQuiz();
+
+/* ════ GAME SWITCHER ════ */
+let curGame='ej';
+function switchGame(game){
+  curGame=game;
+  document.querySelectorAll('.game-panel').forEach(p=>p.classList.remove('active'));
+  $('game-'+game).classList.add('active');
+  // Update game tabs
+  $('gtEJ').className='game-tab'+(game==='ej'?' ej-active':'');
+  $('gtLO').className='game-tab'+(game==='lo'?' lo-active':'');
+  // Update nav button styles & active tab
+  const tabs=document.querySelectorAll('.nb');
+  const TAB_MAP=['overview','draws','stats','generator','checker','quiz','infos'];
+  tabs.forEach((b,i)=>{
+    b.className='nb '+(game==='ej'?'ej-nb':'lo-nb');
+    b.setAttribute('onclick','goTab(\''+TAB_MAP[i]+'\',this)');
+  });
+  // Activate overview tab
+  goTab('overview',tabs[0]);
+  // Update refresh button color
+  const rb=$('refBtn');if(rb)rb.className='btn-ref '+(game==='ej'?'ej-ref':'lo-ref');
+  toast(game==='ej'?'🎱 Eurojackpot':'🔴 Lotto 6aus49');
+}
+
+/* ════ TAB NAV ════ */
+function goTab(name,btn){
+  const game=curGame;
+  document.querySelectorAll('#game-'+game+' .tab').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nb').forEach(b=>b.classList.remove('active'));
+  const panel=$(`${game}-${name}`);if(panel)panel.classList.add('active');
+  if(btn)btn.classList.add('active');
+  else document.querySelectorAll('.nb').forEach(b=>{if(b.getAttribute('onclick')?.includes("'"+name+"'"))b.classList.add('active')});
+  $('topNav').classList.remove('open');
+  // Re-animate freq bars
+  if(name==='stats'){setTimeout(()=>document.querySelectorAll('.ffill').forEach(b=>{b.style.width='0';setTimeout(()=>b.style.width=b.dataset.w,60)}),80);}
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function toggleNav(){$('topNav').classList.toggle('open')}
+
+/* ════ DARK MODE ════ */
+let dark=false;
+function applyDark(on){
+  dark=on;document.documentElement.setAttribute('data-theme',on?'dark':'light');
+  const btn=$('darkBtn');if(btn)btn.textContent=on?'☀️':'🌙';
+  const sw=$('sw-dark');if(sw)sw.checked=on;
+  try{localStorage.setItem('ej_dark',on?'1':'0')}catch(e){}
+}
+function toggleDark(){applyDark(!dark);toast(dark?'🌙 Dark Mode':'☀️ Light Mode');}
+try{if(localStorage.getItem('ej_dark')==='1')applyDark(true)}catch(e){}
+
+/* ════ SETTINGS ════ */
+function openSettings(){$('settingsModal').classList.add('open')}
+function closeSettings(){$('settingsModal').classList.remove('open')}
+$('settingsModal').addEventListener('click',e=>{if(e.target===e.currentTarget)closeSettings()});
+function toggleAnim(){const on=$('sw-anim')?.checked!==false;document.documentElement.style.setProperty('--tr',on?'.16s ease':'0s');toast(on?'✨ Animationen an':'✨ aus');}
+function resetData(){if(!confirm('Alle Daten löschen?'))return;genState.ej.tips=[];genState.lo.tips=[];qHs=0;try{localStorage.clear()}catch(e){}renderSaved('ej');renderSaved('lo');toast('🗑 Alle Daten gelöscht');closeSettings();}
+
+/* ════ REFRESH ════ */
+function doRefresh(){
+  const btn=$('refBtn'),ico=$('refIco');if(!btn||!ico)return;
+  btn.disabled=true;btn.style.opacity='.7';
+  ico.style.transition='transform .65s ease';ico.style.transform='rotate(360deg)';
+  setTimeout(()=>location.reload(),700);
+}
+
+/* ════ EXPORT / SHARE ════ */
+function exportCSV(){
+  if(curGame==='ej'){
+    const rows=['Datum,Tag,Z1,Z2,Z3,Z4,Z5,Euro1,Euro2,Summe,Jackpot'];
+    EJ_DRAWS.forEach(d=>rows.push(d.date+','+d.day+','+d.main.join(',')+','+d.euro.join(',')+','+d.main.reduce((a,b)=>a+b,0)+','+(d.jackpot?'JA':'NEIN')));
+    const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([rows.join('\n')],{type:'text/csv'}));a.download='eurojackpot.csv';a.click();
+  }else{
+    const rows=['Datum,Tag,Z1,Z2,Z3,Z4,Z5,Z6,Superzahl,Summe,Jackpot'];
+    LO_DRAWS.forEach(d=>rows.push(d.date+','+d.day+','+d.nums.join(',')+','+d.sz+','+d.nums.reduce((a,b)=>a+b,0)+','+d.jp));
+    const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([rows.join('\n')],{type:'text/csv'}));a.download='lotto6aus49.csv';a.click();
+  }
+  toast('⬇ CSV exportiert!');
+}
+function copyLast(game){
+  let txt='';
+  if(game==='ej'){const d=EJ_DRAWS[0];txt='EJ '+d.date+': '+d.main.join('–')+' + Euro: '+d.euro.join('–')+(d.jackpot?' 🏆':'')}
+  else{const d=LO_DRAWS[0];txt='Lotto '+d.date+': '+d.nums.join('–')+' SZ: '+d.sz}
+  navigator.clipboard?.writeText(txt).then(()=>toast('📋 Kopiert!')).catch(()=>toast('Fehler'));
+}
+function copyAllDraws(game){
+  let txt='';
+  if(game==='ej')txt=EJ_DRAWS.map(d=>d.date+': '+d.main.join(', ')+' + '+d.euro.join(', ')+(d.jackpot?' 🏆':'')).join('\n');
+  else txt=LO_DRAWS.map(d=>d.date+': '+d.nums.join(', ')+' SZ:'+d.sz).join('\n');
+  navigator.clipboard?.writeText(txt).then(()=>toast('📋 Alle kopiert!')).catch(()=>toast('Fehler'));
+}
+function shareApp(){
+  if(navigator.share)navigator.share({title:'Lotto Tracker 2026',text:'Eurojackpot & Lotto 6aus49',url:location.href}).catch(()=>{});
+  else navigator.clipboard?.writeText(location.href).then(()=>toast('🔗 Link kopiert!')).catch(()=>toast('Teilen nicht verfügbar'));
+}
+function printPage(){window.print();toast('🖨 Druck gestartet');}
+
+/* ════ KEYBOARD SHORTCUTS ════ */
+const TAB_NAMES=['overview','draws','stats','generator','checker','quiz','infos'];
+document.addEventListener('keydown',e=>{
+  if(['INPUT','SELECT','TEXTAREA'].includes(e.target.tagName))return;
+  if(e.key>='1'&&e.key<='7'&&!e.ctrlKey&&!e.metaKey){const idx=+e.key-1;const btns=document.querySelectorAll('.nb');goTab(TAB_NAMES[idx],btns[idx]||null);}
+  if(e.key==='e'&&!e.ctrlKey&&!e.metaKey){switchGame('ej');$('gtEJ').click();}
+  if(e.key==='l'&&!e.ctrlKey&&!e.metaKey){switchGame('lo');$('gtLO').click();}
+  if(e.key==='d'&&!e.ctrlKey&&!e.metaKey)toggleDark();
+  if(e.key==='g'&&!e.ctrlKey&&!e.metaKey){goTab('generator',null);generateTip(curGame);}
+  if(e.key==='r'&&!e.ctrlKey&&!e.metaKey)doRefresh();
+  if(e.key==='Escape')closeSettings();
+});
+
+/* INIT mode desc */
+$('ej-mode-desc')&&($('ej-mode-desc').textContent=EJ_MODES.random);
+$('lo-mode-desc')&&($('lo-mode-desc').textContent=LO_MODES.random);
+</script>
+</body>
+</html>

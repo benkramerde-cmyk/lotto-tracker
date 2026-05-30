@@ -1,0 +1,44 @@
+name: 🎱 Auto-Update Lotto Daten
+
+on:
+  schedule:
+    # Eurojackpot: Dienstag & Freitag um 21:30 Uhr MEZ (= 19:30 UTC)
+    - cron: '30 19 * * 2'   # Dienstag
+    - cron: '30 19 * * 5'   # Freitag
+    # Lotto 6aus49: Mittwoch um 19:00 Uhr MEZ (= 17:00 UTC)
+    - cron: '0 17 * * 3'    # Mittwoch
+    # Lotto 6aus49: Samstag um 20:30 Uhr MEZ (= 18:30 UTC)
+    - cron: '30 18 * * 6'   # Samstag
+  workflow_dispatch:         # Manuell auslösbar
+
+jobs:
+  update-data:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: 📥 Repository auschecken
+        uses: actions/checkout@v4
+
+      - name: 🐍 Python einrichten
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: 📦 Dependencies installieren
+        run: pip install requests beautifulsoup4 lxml
+
+      - name: 🎱 Eurojackpot Daten abrufen
+        run: python scripts/fetch_ej.py
+
+      - name: 🔴 Lotto 6aus49 Daten abrufen
+        run: python scripts/fetch_lo.py
+
+      - name: 💾 Änderungen speichern & pushen
+        run: |
+          git config --global user.name "Lotto Bot 🤖"
+          git config --global user.email "lotto-bot@github-actions"
+          git add data/ej.json data/lo.json
+          git diff --staged --quiet || git commit -m "🎱 Auto-Update: $(date '+%d.%m.%Y %H:%M') Uhr"
+          git push
