@@ -1,16 +1,17 @@
 {
-  "updated": "27.05.2026 12:00",
-  "source": "dielottozahlende.net / lotto.net",
+  "updated": "30.05.2026 00:01",
+  "source": "westlotto.de / braunschweiger-zeitung.de",
   "draws": [
-    {"date":"23.05.2026","day":"Samstag","nums":[2,6,8,11,14,39],"sz":7,"jp":"48 Mio. €"},
-    {"date":"20.05.2026","day":"Mittwoch","nums":[3,14,34,39,46,48],"sz":5,"jp":"44 Mio. €"},
-    {"date":"16.05.2026","day":"Samstag","nums":[7,11,20,23,27,30],"sz":9,"jp":"42 Mio. €"},
-    {"date":"13.05.2026","day":"Mittwoch","nums":[4,8,17,22,31,45],"sz":3,"jp":"38 Mio. €"},
-    {"date":"09.05.2026","day":"Samstag","nums":[2,3,12,36,39,43],"sz":8,"jp":"36 Mio. €"},
-    {"date":"06.05.2026","day":"Mittwoch","nums":[10,13,19,38,40,48],"sz":2,"jp":"33 Mio. €"},
-    {"date":"02.05.2026","day":"Samstag","nums":[1,5,9,20,21,32],"sz":5,"jp":"31 Mio. €"},
-    {"date":"29.04.2026","day":"Mittwoch","nums":[1,15,25,37,43,47],"sz":4,"jp":"28 Mio. €"},
-    {"date":"25.04.2026","day":"Samstag","nums":[6,12,15,20,35,49],"sz":9,"jp":"26 Mio. €"},
-    {"date":"22.04.2026","day":"Mittwoch","nums":[7,16,24,33,38,44],"sz":1,"jp":"22 Mio. €"}
+    {"date":"27.05.2026","day":"Mittwoch", "nums":[16,26,30,41,44,47],"sz":1,"jp":"50 Mio. €"},
+    {"date":"23.05.2026","day":"Samstag",  "nums":[2,6,8,11,14,39],  "sz":7,"jp":"48 Mio. €"},
+    {"date":"20.05.2026","day":"Mittwoch", "nums":[3,14,34,39,46,48],"sz":5,"jp":"44 Mio. €"},
+    {"date":"16.05.2026","day":"Samstag",  "nums":[7,11,20,23,27,30],"sz":9,"jp":"42 Mio. €"},
+    {"date":"13.05.2026","day":"Mittwoch", "nums":[4,8,17,22,31,45], "sz":3,"jp":"38 Mio. €"},
+    {"date":"09.05.2026","day":"Samstag",  "nums":[2,3,12,36,39,43], "sz":8,"jp":"36 Mio. €"},
+    {"date":"06.05.2026","day":"Mittwoch", "nums":[10,13,19,38,40,48],"sz":2,"jp":"33 Mio. €"},
+    {"date":"02.05.2026","day":"Samstag",  "nums":[1,5,9,20,21,32],  "sz":5,"jp":"31 Mio. €"},
+    {"date":"29.04.2026","day":"Mittwoch", "nums":[1,15,25,37,43,47],"sz":4,"jp":"28 Mio. €"},
+    {"date":"25.04.2026","day":"Samstag",  "nums":[6,12,15,20,35,49],"sz":9,"jp":"26 Mio. €"},
+    {"date":"22.04.2026","day":"Mittwoch", "nums":[7,16,24,33,38,44],"sz":1,"jp":"22 Mio. €"}
   ]
 }
