@@ -1,17 +1,18 @@
 {
-  "updated": "27.05.2026 12:00",
-  "source": "euro-jackpot.net / winnersystem.org",
+  "updated": "30.05.2026 00:01",
+  "source": "braunschweiger-zeitung.de / web.de",
   "draws": [
-    {"date":"26.05.2026","day":"Dienstag","main":[5,11,23,33,42],"euro":[10,12],"jackpot":true,"jp":"120 Mio. €"},
-    {"date":"22.05.2026","day":"Freitag","main":[5,34,35,42,46],"euro":[3,5],"jackpot":false,"jp":"120 Mio. €"},
-    {"date":"19.05.2026","day":"Dienstag","main":[10,36,37,39,47],"euro":[5,6],"jackpot":false,"jp":"118 Mio. €"},
-    {"date":"15.05.2026","day":"Freitag","main":[1,32,33,36,37],"euro":[7,12],"jackpot":false,"jp":"102 Mio. €"},
-    {"date":"12.05.2026","day":"Dienstag","main":[7,15,19,28,35],"euro":[3,11],"jackpot":false,"jp":"87 Mio. €"},
-    {"date":"08.05.2026","day":"Freitag","main":[3,17,18,31,41],"euro":[6,12],"jackpot":false,"jp":"72 Mio. €"},
-    {"date":"05.05.2026","day":"Dienstag","main":[1,30,33,34,43],"euro":[5,10],"jackpot":false,"jp":"58 Mio. €"},
-    {"date":"01.05.2026","day":"Freitag","main":[10,11,13,16,27],"euro":[5,7],"jackpot":false,"jp":"44 Mio. €"},
-    {"date":"28.04.2026","day":"Dienstag","main":[19,20,41,43,46],"euro":[5,7],"jackpot":false,"jp":"35 Mio. €"},
-    {"date":"24.04.2026","day":"Freitag","main":[6,21,29,39,44],"euro":[1,5],"jackpot":false,"jp":"26 Mio. €"},
-    {"date":"21.04.2026","day":"Dienstag","main":[31,32,36,39,47],"euro":[7,8],"jackpot":false,"jp":"17 Mio. €"}
+    {"date":"29.05.2026","day":"Freitag",  "main":[3,20,21,42,49],"euro":[5,6], "jackpot":false,"jp":"10 Mio. €"},
+    {"date":"26.05.2026","day":"Dienstag", "main":[5,11,23,33,42],"euro":[10,12],"jackpot":true, "jp":"120 Mio. €"},
+    {"date":"22.05.2026","day":"Freitag",  "main":[5,34,35,42,46],"euro":[3,5], "jackpot":false,"jp":"120 Mio. €"},
+    {"date":"19.05.2026","day":"Dienstag", "main":[10,36,37,39,47],"euro":[5,6],"jackpot":false,"jp":"118 Mio. €"},
+    {"date":"15.05.2026","day":"Freitag",  "main":[1,32,33,36,37],"euro":[7,12],"jackpot":false,"jp":"102 Mio. €"},
+    {"date":"12.05.2026","day":"Dienstag", "main":[7,15,19,28,35],"euro":[3,11],"jackpot":false,"jp":"87 Mio. €"},
+    {"date":"08.05.2026","day":"Freitag",  "main":[3,17,18,31,41],"euro":[6,12],"jackpot":false,"jp":"72 Mio. €"},
+    {"date":"05.05.2026","day":"Dienstag", "main":[1,30,33,34,43],"euro":[5,10],"jackpot":false,"jp":"58 Mio. €"},
+    {"date":"01.05.2026","day":"Freitag",  "main":[10,11,13,16,27],"euro":[5,7],"jackpot":false,"jp":"44 Mio. €"},
+    {"date":"28.04.2026","day":"Dienstag", "main":[19,20,41,43,46],"euro":[5,7],"jackpot":false,"jp":"35 Mio. €"},
+    {"date":"24.04.2026","day":"Freitag",  "main":[6,21,29,39,44],"euro":[1,5], "jackpot":false,"jp":"26 Mio. €"},
+    {"date":"21.04.2026","day":"Dienstag", "main":[31,32,36,39,47],"euro":[7,8],"jackpot":false,"jp":"17 Mio. €"}
   ]
 }
